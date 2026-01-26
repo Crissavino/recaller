@@ -17,7 +17,8 @@ class SettingsController extends Controller
 
     public function index(Request $request): View
     {
-        $clinic = $request->user()->clinics()->with(['settings', 'integrations', 'phoneNumbers', 'clinicSubscriptions.plan'])->first();
+        $user = $request->user();
+        $clinic = $user->clinics()->with(['settings', 'integrations', 'phoneNumbers', 'clinicSubscriptions.plan'])->first();
 
         if (!$clinic) {
             abort(404, 'No clinic found');
@@ -42,7 +43,10 @@ class SettingsController extends Controller
         $subscription = $clinic->activeSubscription($this->paymentService->getProviderName());
         $currentPlan = $subscription?->plan;
 
-        return view('settings.index', compact('clinic', 'templates', 'twilioIntegration', 'activePhone', 'integrations', 'activePhones', 'subscription', 'currentPlan'));
+        // Notification preferences
+        $notificationPreferences = $user->getNotificationPreferences();
+
+        return view('settings.index', compact('clinic', 'templates', 'twilioIntegration', 'activePhone', 'integrations', 'activePhones', 'subscription', 'currentPlan', 'notificationPreferences'));
     }
 
     public function updateGeneral(Request $request): RedirectResponse
@@ -164,5 +168,20 @@ class SettingsController extends Controller
         $template->delete();
 
         return back()->with('success', __('settings.template_deleted'));
+    }
+
+    public function updateNotifications(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+
+        $preferences = [
+            'email_new_lead' => $request->boolean('email_new_lead'),
+            'email_lead_responded' => $request->boolean('email_lead_responded'),
+            'email_daily_summary' => $request->boolean('email_daily_summary'),
+        ];
+
+        $user->update(['notification_preferences' => $preferences]);
+
+        return back()->with('success', __('settings.notifications_updated'));
     }
 }

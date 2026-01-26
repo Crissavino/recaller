@@ -51,4 +51,17 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | SMS/Voice Provider Configuration
+    |--------------------------------------------------------------------------
+    */
+
+    'twilio' => [
+        'sid' => env('TWILIO_ACCOUNT_SID'),
+        'token' => env('TWILIO_AUTH_TOKEN'),
+        'voice_webhook_url' => env('TWILIO_VOICE_WEBHOOK_URL'),
+        'sms_webhook_url' => env('TWILIO_SMS_WEBHOOK_URL'),
+    ],
+
 ];

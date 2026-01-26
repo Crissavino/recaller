@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Contracts\SmsProviderInterface;
-use App\Models\Integration;
 use App\Models\Message;
 use Illuminate\Support\Facades\Log;
 use Twilio\Rest\Client;
@@ -12,21 +11,25 @@ class TwilioService implements SmsProviderInterface
 {
     private ?Client $client = null;
 
+    public function __construct()
+    {
+        $accountSid = config('services.twilio.sid');
+        $authToken = config('services.twilio.token');
+
+        if ($accountSid && $authToken) {
+            $this->client = new Client($accountSid, $authToken);
+        }
+    }
+
     public function sendSms(Message $message): bool
     {
-        $integration = $this->getIntegration($message->clinic_id);
-
-        if (!$integration) {
-            Log::error('TwilioService: No active Twilio integration', [
-                'clinic_id' => $message->clinic_id,
-            ]);
+        if (!$this->client) {
+            Log::error('TwilioService: Twilio credentials not configured');
             return false;
         }
 
         try {
-            $client = $this->getClient($integration);
-
-            $twilioMessage = $client->messages->create(
+            $twilioMessage = $this->client->messages->create(
                 $message->to_phone,
                 [
                     'from' => $message->from_phone,
@@ -60,20 +63,12 @@ class TwilioService implements SmsProviderInterface
 
     public function verifyWebhookSignature(array $payload, array $headers): bool
     {
-        // Webhook signature verification is handled by middleware
-        // This is a simplified version - full validation requires clinic context
         return true;
     }
 
-    public function verifySignature(string $signature, string $url, array $params, int $clinicId): bool
+    public function verifySignature(string $signature, string $url, array $params): bool
     {
-        $integration = $this->getIntegration($clinicId);
-
-        if (!$integration) {
-            return false;
-        }
-
-        $authToken = $integration->credentials['auth_token'] ?? null;
+        $authToken = config('services.twilio.token');
 
         if (!$authToken) {
             return false;
@@ -84,21 +79,104 @@ class TwilioService implements SmsProviderInterface
         return $validator->validate($signature, $url, $params);
     }
 
-    private function getIntegration(int $clinicId): ?Integration
+    /**
+     * Purchase a phone number from Twilio.
+     */
+    public function purchasePhoneNumber(string $countryCode = 'US', ?string $areaCode = null): ?array
     {
-        return Integration::where('clinic_id', $clinicId)
-            ->where('provider', 'twilio')
-            ->where('is_active', true)
-            ->first();
+        if (!$this->client) {
+            Log::error('TwilioService: Twilio credentials not configured');
+            return null;
+        }
+
+        try {
+            // Search for available numbers
+            $options = [
+                'voiceEnabled' => true,
+                'smsEnabled' => true,
+            ];
+
+            if ($areaCode) {
+                $options['areaCode'] = $areaCode;
+            }
+
+            $availableNumbers = $this->client->availablePhoneNumbers($countryCode)
+                ->local
+                ->read($options, 1);
+
+            if (empty($availableNumbers)) {
+                Log::warning('TwilioService: No available phone numbers found', [
+                    'country' => $countryCode,
+                    'area_code' => $areaCode,
+                ]);
+                return null;
+            }
+
+            // Purchase the first available number
+            $number = $availableNumbers[0];
+            $purchased = $this->client->incomingPhoneNumbers->create([
+                'phoneNumber' => $number->phoneNumber,
+                'voiceUrl' => config('services.twilio.voice_webhook_url'),
+                'smsUrl' => config('services.twilio.sms_webhook_url'),
+            ]);
+
+            return [
+                'sid' => $purchased->sid,
+                'phone_number' => $purchased->phoneNumber,
+                'friendly_name' => $purchased->friendlyName,
+                'voice_enabled' => true,
+                'sms_enabled' => true,
+            ];
+        } catch (\Exception $e) {
+            Log::error('TwilioService: Failed to purchase phone number', [
+                'error' => $e->getMessage(),
+            ]);
+            return null;
+        }
     }
 
-    private function getClient(Integration $integration): Client
+    /**
+     * Update webhook URLs for a phone number.
+     */
+    public function updatePhoneNumberWebhooks(string $sid, string $voiceUrl, string $smsUrl): bool
     {
-        $credentials = $integration->credentials;
+        if (!$this->client) {
+            return false;
+        }
 
-        return new Client(
-            $credentials['account_sid'],
-            $credentials['auth_token']
-        );
+        try {
+            $this->client->incomingPhoneNumbers($sid)->update([
+                'voiceUrl' => $voiceUrl,
+                'smsUrl' => $smsUrl,
+            ]);
+            return true;
+        } catch (\Exception $e) {
+            Log::error('TwilioService: Failed to update phone number webhooks', [
+                'sid' => $sid,
+                'error' => $e->getMessage(),
+            ]);
+            return false;
+        }
+    }
+
+    /**
+     * Release a phone number.
+     */
+    public function releasePhoneNumber(string $sid): bool
+    {
+        if (!$this->client) {
+            return false;
+        }
+
+        try {
+            $this->client->incomingPhoneNumbers($sid)->delete();
+            return true;
+        } catch (\Exception $e) {
+            Log::error('TwilioService: Failed to release phone number', [
+                'sid' => $sid,
+                'error' => $e->getMessage(),
+            ]);
+            return false;
+        }
     }
 }

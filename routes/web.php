@@ -89,6 +89,7 @@ Route::middleware(['auth', 'verified', 'setup.completed', 'subscribed'])->group(
     Route::get('/settings', [SettingsController::class, 'index'])->name('settings.index');
     Route::put('/settings/general', [SettingsController::class, 'updateGeneral'])->name('settings.update.general');
     Route::put('/settings/followup', [SettingsController::class, 'updateFollowup'])->name('settings.update.followup');
+    Route::put('/settings/notifications', [SettingsController::class, 'updateNotifications'])->name('settings.update.notifications');
     Route::post('/settings/templates', [SettingsController::class, 'storeTemplate'])->name('settings.store.template');
     Route::put('/settings/templates/{templateId}', [SettingsController::class, 'updateTemplate'])->name('settings.update.template');
     Route::patch('/settings/templates/{templateId}/toggle', [SettingsController::class, 'toggleTemplate'])->name('settings.toggle.template');

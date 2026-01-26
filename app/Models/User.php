@@ -21,6 +21,7 @@ class User extends Authenticatable
         'phone',
         'is_active',
         'terms_accepted_at',
+        'notification_preferences',
     ];
 
     protected $hidden = [
@@ -35,7 +36,40 @@ class User extends Authenticatable
             'password' => 'hashed',
             'is_active' => 'boolean',
             'terms_accepted_at' => 'datetime',
+            'notification_preferences' => 'array',
         ];
+    }
+
+    /**
+     * Default notification preferences.
+     */
+    public static function defaultNotificationPreferences(): array
+    {
+        return [
+            'email_new_lead' => true,
+            'email_lead_responded' => true,
+            'email_daily_summary' => false,
+        ];
+    }
+
+    /**
+     * Get notification preferences with defaults.
+     */
+    public function getNotificationPreferences(): array
+    {
+        return array_merge(
+            self::defaultNotificationPreferences(),
+            $this->notification_preferences ?? []
+        );
+    }
+
+    /**
+     * Check if a specific notification is enabled.
+     */
+    public function wantsNotification(string $type): bool
+    {
+        $prefs = $this->getNotificationPreferences();
+        return $prefs[$type] ?? true;
     }
 
     public function clinics(): BelongsToMany

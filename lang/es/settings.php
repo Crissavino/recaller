@@ -54,6 +54,16 @@ return [
     'trigger_follow_up' => 'Seguimiento',
     'available_variables' => 'Variables disponibles',
 
+    // Notification Preferences
+    'notifications' => 'Notificaciones',
+    'notifications_updated' => 'Preferencias de notificaciones actualizadas.',
+    'notify_new_lead' => 'Notificaciones de nuevos leads',
+    'notify_new_lead_help' => 'Recibir un email cuando tengas un nuevo lead de llamada perdida',
+    'notify_lead_responded' => 'Notificaciones de respuestas',
+    'notify_lead_responded_help' => 'Recibir un email cuando un lead responda a tu SMS',
+    'notify_daily_summary' => 'Resumen diario',
+    'notify_daily_summary_help' => 'Recibir un email diario con el resumen de actividad de leads',
+
     // Subscription section
     'subscription' => 'Suscripcion',
     'danger_zone' => 'Zona de Peligro',

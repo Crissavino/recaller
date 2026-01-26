@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
 use App\Models\User;
+use App\Notifications\WelcomeNotification;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -74,6 +75,8 @@ class RegisteredUserController extends Controller
         $clinic->users()->attach($user->id, ['role' => 'owner']);
 
         event(new Registered($user));
+
+        $user->notify(new WelcomeNotification());
 
         Auth::login($user);
 

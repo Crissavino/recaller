@@ -55,6 +55,16 @@ return [
     'trigger_follow_up' => 'Follow Up',
     'available_variables' => 'Available variables',
 
+    // Notification Preferences
+    'notifications' => 'Notifications',
+    'notifications_updated' => 'Notification preferences updated.',
+    'notify_new_lead' => 'New lead notifications',
+    'notify_new_lead_help' => 'Receive an email when you get a new missed call lead',
+    'notify_lead_responded' => 'Lead response notifications',
+    'notify_lead_responded_help' => 'Receive an email when a lead replies to your SMS',
+    'notify_daily_summary' => 'Daily summary',
+    'notify_daily_summary_help' => 'Receive a daily email with your lead activity summary',
+
     // Subscription section
     'subscription' => 'Subscription',
     'danger_zone' => 'Danger Zone',

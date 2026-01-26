@@ -303,6 +303,53 @@
                 </form>
             </div>
 
+            <!-- Notification Preferences -->
+            <div style="background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 24px;">
+                <div style="padding: 16px 20px; border-bottom: 1px solid #f3f4f6;">
+                    <h3 style="font-weight: 600; color: #111827; margin: 0;">{{ __('settings.notifications') }}</h3>
+                </div>
+                <form action="{{ route('settings.update.notifications') }}" method="POST" style="padding: 20px;">
+                    @csrf
+                    @method('PUT')
+
+                    <div style="display: flex; flex-direction: column; gap: 16px; margin-bottom: 20px;">
+                        <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                            <input type="checkbox" name="email_new_lead" value="1" {{ $notificationPreferences['email_new_lead'] ? 'checked' : '' }}
+                                style="width: 20px; height: 20px; margin-top: 2px; accent-color: #0ea5e9;">
+                            <div>
+                                <span style="font-weight: 500; color: #111827; display: block;">{{ __('settings.notify_new_lead') }}</span>
+                                <span style="font-size: 13px; color: #6b7280;">{{ __('settings.notify_new_lead_help') }}</span>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer;">
+                            <input type="checkbox" name="email_lead_responded" value="1" {{ $notificationPreferences['email_lead_responded'] ? 'checked' : '' }}
+                                style="width: 20px; height: 20px; margin-top: 2px; accent-color: #0ea5e9;">
+                            <div>
+                                <span style="font-weight: 500; color: #111827; display: block;">{{ __('settings.notify_lead_responded') }}</span>
+                                <span style="font-size: 13px; color: #6b7280;">{{ __('settings.notify_lead_responded_help') }}</span>
+                            </div>
+                        </label>
+
+                        <label style="display: flex; align-items: flex-start; gap: 12px; cursor: pointer; opacity: 0.5;" title="{{ __('common.coming_soon') }}">
+                            <input type="checkbox" name="email_daily_summary" value="1" {{ $notificationPreferences['email_daily_summary'] ? 'checked' : '' }} disabled
+                                style="width: 20px; height: 20px; margin-top: 2px;">
+                            <div>
+                                <span style="font-weight: 500; color: #111827; display: block;">
+                                    {{ __('settings.notify_daily_summary') }}
+                                    <span style="background: #f3f4f6; color: #6b7280; font-size: 10px; padding: 2px 6px; border-radius: 4px; margin-left: 6px;">{{ __('common.coming_soon') }}</span>
+                                </span>
+                                <span style="font-size: 13px; color: #6b7280;">{{ __('settings.notify_daily_summary_help') }}</span>
+                            </div>
+                        </label>
+                    </div>
+
+                    <button type="submit" style="background: #111827; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 500; border: none; cursor: pointer;">
+                        {{ __('settings.save') }}
+                    </button>
+                </form>
+            </div>
+
             <!-- Message Templates -->
             <div style="background: #fff; border-radius: 12px; border: 1px solid #e5e7eb; margin-bottom: 24px;" x-data="{ showNewForm: false }">
                 <div style="padding: 16px 20px; border-bottom: 1px solid #f3f4f6; display: flex; justify-content: space-between; align-items: center;">

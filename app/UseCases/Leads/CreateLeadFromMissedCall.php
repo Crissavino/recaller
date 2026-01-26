@@ -11,6 +11,7 @@ use App\Models\Clinic;
 use App\Models\Conversation;
 use App\Models\Lead;
 use App\Models\MissedCall;
+use App\Notifications\NewLeadNotification;
 use Illuminate\Support\Facades\DB;
 
 class CreateLeadFromMissedCall
@@ -53,6 +54,7 @@ class CreateLeadFromMissedCall
             ]);
 
             $this->scheduleFollowUp($lead, $clinic);
+            $this->notifyClinicUsers($lead, $clinic);
 
             return $lead;
         });
@@ -72,5 +74,16 @@ class CreateLeadFromMissedCall
 
         SendScheduledFollowUp::dispatch($lead->id)
             ->delay(now()->addSeconds($delaySeconds));
+    }
+
+    private function notifyClinicUsers(Lead $lead, Clinic $clinic): void
+    {
+        $lead->load('caller');
+
+        foreach ($clinic->users as $user) {
+            if ($user->wantsNotification('email_new_lead')) {
+                $user->notify(new NewLeadNotification($lead));
+            }
+        }
     }
 }

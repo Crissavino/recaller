@@ -17,6 +17,7 @@ class ClinicPhoneNumber extends Model
         'integration_id',
         'phone_number',
         'provider',
+        'provider_sid',
         'friendly_name',
         'is_active',
         'voice_enabled',

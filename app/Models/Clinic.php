@@ -66,6 +66,14 @@ class Clinic extends Model
         return $this->hasMany(ClinicPhoneNumber::class);
     }
 
+    /**
+     * Get the assigned phone number for this clinic.
+     */
+    public function phoneNumber(): HasOne
+    {
+        return $this->hasOne(PhoneNumber::class)->where('status', PhoneNumber::STATUS_ASSIGNED);
+    }
+
     public function webhookEvents(): HasMany
     {
         return $this->hasMany(WebhookEvent::class);

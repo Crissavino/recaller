@@ -105,7 +105,7 @@ class SetupWizardController extends Controller
      */
     public function provider(Request $request): View|RedirectResponse
     {
-        $clinic = $request->user()->clinics()->with('phoneNumbers')->first();
+        $clinic = $request->user()->clinics()->with('phoneNumber')->first();
 
         if (!$clinic) {
             return redirect()->route('setup.welcome');
@@ -115,14 +115,11 @@ class SetupWizardController extends Controller
             return redirect()->route('dashboard');
         }
 
-        // Get the clinic's assigned phone number (if any)
-        $phoneNumber = $clinic->phoneNumbers->where('is_active', true)->first();
-
         return view('setup.provider', [
             'step' => 3,
             'totalSteps' => count($this->steps),
             'clinic' => $clinic,
-            'phoneNumber' => $phoneNumber,
+            'phoneNumber' => $clinic->phoneNumber,
         ]);
     }
 
@@ -208,7 +205,7 @@ class SetupWizardController extends Controller
      */
     public function test(Request $request): View|RedirectResponse
     {
-        $clinic = $request->user()->clinics()->with(['phoneNumbers', 'messageTemplates', 'settings'])->first();
+        $clinic = $request->user()->clinics()->with(['phoneNumber', 'messageTemplates', 'settings'])->first();
 
         if (!$clinic) {
             return redirect()->route('setup.welcome');
@@ -218,7 +215,7 @@ class SetupWizardController extends Controller
             return redirect()->route('dashboard');
         }
 
-        $activePhone = $clinic->phoneNumbers->where('is_active', true)->first();
+        $activePhone = $clinic->phoneNumber;
         $template = $clinic->messageTemplates->where('trigger_event', 'missed_call')->where('is_active', true)->first();
 
         // Build message preview with variables replaced
@@ -254,13 +251,13 @@ class SetupWizardController extends Controller
             'phone_number' => 'required|string|max:20',
         ]);
 
-        $clinic = $request->user()->clinics()->with(['phoneNumbers', 'messageTemplates', 'settings'])->first();
+        $clinic = $request->user()->clinics()->with(['phoneNumber', 'messageTemplates', 'settings'])->first();
 
         if (!$clinic) {
             abort(404);
         }
 
-        $activePhone = $clinic->phoneNumbers->where('is_active', true)->first();
+        $activePhone = $clinic->phoneNumber;
         $template = $clinic->messageTemplates->where('trigger_event', 'missed_call')->where('is_active', true)->first();
 
         if (!$activePhone) {

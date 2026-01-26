@@ -19,4 +19,5 @@ return [
     'none' => 'None',
     'or' => 'or',
     'and' => 'and',
+    'coming_soon' => 'Coming soon',
 ];

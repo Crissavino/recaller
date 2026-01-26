@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\SmsProviderInterface;
 use App\Models\ClinicPhoneNumber;
+use App\Models\PhoneNumber;
 use InvalidArgumentException;
 
 class SmsProviderFactory
@@ -28,9 +29,9 @@ class SmsProviderFactory
     }
 
     /**
-     * Get the SMS provider service for a clinic phone number
+     * Get the SMS provider service for a phone number
      */
-    public function forPhoneNumber(ClinicPhoneNumber $phoneNumber): SmsProviderInterface
+    public function forPhoneNumber(PhoneNumber|ClinicPhoneNumber $phoneNumber): SmsProviderInterface
     {
         return $this->make($phoneNumber->provider ?? 'twilio');
     }

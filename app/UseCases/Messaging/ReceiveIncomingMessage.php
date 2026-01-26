@@ -6,8 +6,10 @@ use App\Enums\LeadStage;
 use App\Enums\MessageChannel;
 use App\Enums\MessageDirection;
 use App\Models\Caller;
+use App\Models\Clinic;
 use App\Models\Conversation;
 use App\Models\Message;
+use App\Notifications\LeadRespondedNotification;
 use Illuminate\Support\Facades\Log;
 
 class ReceiveIncomingMessage
@@ -59,7 +61,24 @@ class ReceiveIncomingMessage
             $lead->transitionTo(LeadStage::RESPONDED);
         }
 
+        $this->notifyClinicUsers($message, $conversation, $clinicId);
+
         return $message;
+    }
+
+    private function notifyClinicUsers(Message $message, Conversation $conversation, int $clinicId): void
+    {
+        $clinic = Clinic::with('users')->find($clinicId);
+
+        if (!$clinic) {
+            return;
+        }
+
+        foreach ($clinic->users as $user) {
+            if ($user->wantsNotification('email_lead_responded')) {
+                $user->notify(new LeadRespondedNotification($message, $conversation));
+            }
+        }
     }
 
     private function findActiveConversation(Caller $caller): ?Conversation
