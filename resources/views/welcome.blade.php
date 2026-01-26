@@ -920,7 +920,8 @@
             .solution-visual { order: -1; }
         }
         @media (max-width: 640px) {
-            .nav-links a:not(.btn) { display: none; }
+            .nav-links > a:not(.btn) { display: none; }
+            .lang-selector { display: flex; }
             .hero { padding: 110px 20px 50px; }
             .problem, .solution, .section, .pricing, .cta { padding: 50px 20px; }
             .hero-cta { flex-direction: column; align-items: center; }
@@ -968,7 +969,7 @@
         <p class="hero-subhead">{{ __('landing.hero.subhead') }}</p>
         <p>{{ __('landing.hero.description') }}</p>
         <div class="hero-cta">
-            <a href="{{ route('pricing') }}" class="btn btn-primary btn-large">
+            <a href="#pricing" class="btn btn-primary btn-large">
                 {{ __('landing.hero.cta_primary') }}
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
@@ -1031,7 +1032,7 @@
                     <div class="solution-benefit"><span class="check">✓</span> {{ __('landing.solution.benefit3') }}</div>
                     <div class="solution-benefit"><span class="check">✓</span> {{ __('landing.solution.benefit4') }}</div>
                 </div>
-                <a href="{{ route('pricing') }}" class="btn btn-primary">{{ __('landing.solution.cta') }}</a>
+                <a href="#pricing" class="btn btn-primary">{{ __('landing.solution.cta') }}</a>
             </div>
             <div class="solution-visual">
                 <div class="solution-demo">
@@ -1254,7 +1255,7 @@
         <div class="cta-content">
             <h2>{{ __('landing.cta.title') }}</h2>
             <p>{{ __('landing.cta.subtitle') }}</p>
-            <a href="{{ route('pricing') }}" class="btn btn-dark btn-large">
+            <a href="#pricing" class="btn btn-dark btn-large">
                 {{ __('landing.cta.button') }}
                 <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
             </a>
