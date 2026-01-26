@@ -1,0 +1,74 @@
+<?php
+
+namespace App\UseCases\Messaging;
+
+use App\Enums\LeadStage;
+use App\Enums\MessageChannel;
+use App\Enums\MessageDirection;
+use App\Models\Caller;
+use App\Models\Conversation;
+use App\Models\Message;
+use Illuminate\Support\Facades\Log;
+
+class ReceiveIncomingMessage
+{
+    public function execute(
+        int $clinicId,
+        string $fromPhone,
+        string $toPhone,
+        string $body,
+        ?string $providerMessageId = null,
+    ): ?Message {
+        $caller = Caller::where('clinic_id', $clinicId)
+            ->where('phone', $fromPhone)
+            ->first();
+
+        if (!$caller) {
+            Log::info('ReceiveIncomingMessage: Unknown caller, ignoring', [
+                'clinic_id' => $clinicId,
+                'from_phone' => $fromPhone,
+            ]);
+            return null;
+        }
+
+        $conversation = $this->findActiveConversation($caller);
+
+        if (!$conversation) {
+            Log::info('ReceiveIncomingMessage: No active conversation for caller', [
+                'caller_id' => $caller->id,
+            ]);
+            return null;
+        }
+
+        $message = Message::create([
+            'clinic_id' => $clinicId,
+            'conversation_id' => $conversation->id,
+            'channel' => MessageChannel::SMS,
+            'direction' => MessageDirection::INBOUND,
+            'from_phone' => $fromPhone,
+            'to_phone' => $toPhone,
+            'body' => $body,
+            'provider_message_id' => $providerMessageId,
+            'status' => 'received',
+        ]);
+
+        $conversation->updateLastMessageTimestamp();
+
+        $lead = $conversation->lead;
+        if ($lead && $lead->stage === LeadStage::CONTACTED) {
+            $lead->transitionTo(LeadStage::RESPONDED);
+        }
+
+        return $message;
+    }
+
+    private function findActiveConversation(Caller $caller): ?Conversation
+    {
+        return Conversation::whereHas('lead', function ($query) use ($caller) {
+            $query->where('caller_id', $caller->id);
+        })
+            ->where('is_active', true)
+            ->latest()
+            ->first();
+    }
+}

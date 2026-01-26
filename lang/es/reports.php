@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Reportes',
+    'period' => 'Período',
+    'last_7_days' => 'Últimos 7 días',
+    'last_30_days' => 'Últimos 30 días',
+    'last_90_days' => 'Últimos 90 días',
+    'this_month' => 'Este mes',
+    'last_month' => 'Mes anterior',
+    'total_calls' => 'Total llamadas',
+    'total_recovered' => 'Total recuperado',
+    'conversion_rate' => 'Tasa de conversión',
+    'avg_value' => 'Valor promedio',
+    'response_rate' => 'Tasa de respuesta',
+    'messages' => 'mensajes',
+    'recovered_period' => 'recuperados este período',
+    'revenue_over_time' => 'Ingresos a lo largo del tiempo',
+    'lead_funnel' => 'Embudo de leads',
+    'outcome_breakdown' => 'Desglose de resultados',
+    'total_outcomes' => 'resultados totales',
+    'no_data' => 'Sin datos para este período',
+    'no_outcomes' => 'Sin resultados registrados aún',
+    'conversion' => 'conversión',
+];
