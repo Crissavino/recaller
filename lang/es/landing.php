@@ -18,11 +18,11 @@ return [
 
     'problem' => [
         'label' => 'El problema',
-        'title' => 'Las llamadas perdidas te cuestan miles de dólares',
+        'title' => 'Las llamadas perdidas te cuestan miles de euros',
         'stat1_value' => '23%',
         'stat1_text' => 'de las llamadas a clínicas dentales no se atienden. En horas pico, hasta el 40%.',
-        'stat2_value' => '$250',
-        'stat2_text' => 'es el valor promedio de cada paciente. Una llamada perdida = $250 que no recuperas.',
+        'stat2_value' => '€120',
+        'stat2_text' => 'es el valor promedio de cada paciente. Una llamada perdida = €120 que no recuperas.',
         'stat3_value' => '85%',
         'stat3_text' => 'de los pacientes que no logran contactarte NO vuelven a llamar. Van a tu competencia.',
     ],
@@ -38,7 +38,7 @@ return [
         'benefit4' => 'Métricas de cuánto dinero recuperas',
         'cta' => 'Empezar ahora',
         'demo_responded' => 'Respondió hace 2 min',
-        'demo_booked' => 'Cita agendada · +$180 recuperados',
+        'demo_booked' => 'Cita agendada · +€120 recuperados',
     ],
 
     'steps' => [
@@ -102,7 +102,7 @@ return [
                 '1 número de teléfono',
                 'Soporte por email',
             ],
-            'sms_extra' => 'SMS adicional: $0.08',
+            'sms_extra' => 'SMS adicional: €0.08',
         ],
 
         'growth' => [
@@ -119,7 +119,7 @@ return [
                 'Templates personalizables',
                 'Soporte prioritario',
             ],
-            'sms_extra' => 'SMS adicional: $0.05',
+            'sms_extra' => 'SMS adicional: €0.05',
         ],
 
         'pro' => [
@@ -138,7 +138,7 @@ return [
                 'API access',
                 'Soporte telefónico 24/7',
             ],
-            'sms_extra' => 'SMS adicional: $0.03',
+            'sms_extra' => 'SMS adicional: €0.03',
         ],
     ],
 

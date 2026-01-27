@@ -355,10 +355,10 @@
             <h3 class="pricing-card-name">{{ __('landing.pricing.starter.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.starter.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">$</span>{{ __('landing.pricing.starter.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.starter.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">$</span>{{ __('landing.pricing.starter.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.starter.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">
@@ -379,10 +379,10 @@
             <h3 class="pricing-card-name">{{ __('landing.pricing.growth.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.growth.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">$</span>{{ __('landing.pricing.growth.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.growth.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">$</span>{{ __('landing.pricing.growth.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.growth.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">
@@ -403,10 +403,10 @@
             <h3 class="pricing-card-name">{{ __('landing.pricing.pro.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.pro.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">$</span>{{ __('landing.pricing.pro.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.pro.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">$</span>{{ __('landing.pricing.pro.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">€</span>{{ __('landing.pricing.pro.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">

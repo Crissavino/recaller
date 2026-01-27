@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('provider')->default('twilio');
             $table->string('provider_sid')->nullable();
             $table->string('friendly_name')->nullable();
-            $table->string('country_code', 2)->default('US');
+            $table->string('country_code', 2)->default('ES');
             $table->foreignId('clinic_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('status', ['available', 'assigned', 'reserved', 'released'])->default('available');
             $table->boolean('voice_enabled')->default(true);

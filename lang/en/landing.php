@@ -18,11 +18,11 @@ return [
 
     'problem' => [
         'label' => 'The problem',
-        'title' => 'Missed calls cost you thousands of dollars',
+        'title' => 'Missed calls cost you thousands of euros',
         'stat1_value' => '23%',
         'stat1_text' => 'of calls to dental clinics go unanswered. During peak hours, up to 40%.',
-        'stat2_value' => '$250',
-        'stat2_text' => "is the average value of each patient. One missed call = \$250 you don't recover.",
+        'stat2_value' => '€120',
+        'stat2_text' => "is the average value of each patient. One missed call = €120 you don't recover.",
         'stat3_value' => '85%',
         'stat3_text' => "of patients who can't reach you DON'T call back. They go to your competitor.",
     ],
@@ -38,7 +38,7 @@ return [
         'benefit4' => 'Metrics on how much money you recover',
         'cta' => 'Start now',
         'demo_responded' => 'Responded 2 min ago',
-        'demo_booked' => 'Appointment booked · +$180 recovered',
+        'demo_booked' => 'Appointment booked · +€120 recovered',
     ],
 
     'steps' => [
@@ -102,7 +102,7 @@ return [
                 '1 phone number',
                 'Email support',
             ],
-            'sms_extra' => 'Extra SMS: $0.08',
+            'sms_extra' => 'Extra SMS: €0.08',
         ],
 
         'growth' => [
@@ -119,7 +119,7 @@ return [
                 'Customizable templates',
                 'Priority support',
             ],
-            'sms_extra' => 'Extra SMS: $0.05',
+            'sms_extra' => 'Extra SMS: €0.05',
         ],
 
         'pro' => [
@@ -138,7 +138,7 @@ return [
                 'API access',
                 '24/7 phone support',
             ],
-            'sms_extra' => 'Extra SMS: $0.03',
+            'sms_extra' => 'Extra SMS: €0.03',
         ],
     ],
 
