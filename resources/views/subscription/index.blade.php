@@ -192,7 +192,7 @@
                                     <div class="border border-gray-200 rounded-lg p-5 hover:border-sky-300 hover:shadow-md transition">
                                         <h4 class="font-semibold text-gray-900 text-lg">{{ $plan->name }}</h4>
                                         <p class="text-3xl font-bold text-gray-900 mt-2">
-                                            ${{ number_format($plan->monthly_price, 0) }}
+                                            {{ $currencySymbol }}{{ config('pricing.plans.' . $plan->slug . '.' . $currentCurrency . '.monthly') }}
                                             <span class="text-sm font-normal text-gray-500">/{{ __('subscription.month') }}</span>
                                         </p>
                                         <p class="text-sm text-gray-500 mt-1 mb-4">
@@ -221,7 +221,7 @@
                                 <div class="border rounded-lg p-4 {{ $currentPlan?->id === $plan->id ? 'border-sky-500 bg-sky-50' : 'border-gray-200' }}">
                                     <h4 class="font-semibold text-gray-900">{{ $plan->name }}</h4>
                                     <p class="text-2xl font-bold text-gray-900 mt-2">
-                                        ${{ number_format($plan->monthly_price, 0) }}
+                                        {{ $currencySymbol }}{{ config('pricing.plans.' . $plan->slug . '.' . $currentCurrency . '.monthly') }}
                                         <span class="text-sm font-normal text-gray-500">/{{ __('subscription.month') }}</span>
                                     </p>
                                     <p class="text-sm text-gray-500 mt-1">

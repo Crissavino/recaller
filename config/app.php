@@ -78,13 +78,19 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'es'),
+    'locale' => env('APP_LOCALE', 'ro'),
 
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'es_ES'),
+    'faker_locale' => env('APP_FAKER_LOCALE', 'ro_RO'),
 
-    'available_locales' => ['es', 'en'],
+    'available_locales' => ['ro', 'es', 'en'],
+
+    'locale_currencies' => [
+        'ro' => 'ron',
+        'es' => 'eur',
+        'en' => 'eur',
+    ],
 
     /*
     |--------------------------------------------------------------------------

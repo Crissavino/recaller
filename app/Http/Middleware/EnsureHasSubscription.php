@@ -41,6 +41,10 @@ class EnsureHasSubscription
             return $next($request);
         }
 
+        if ($user->isAdmin()) {
+            return $next($request);
+        }
+
         $clinic = $user->clinics()->first();
 
         // If clinic has no active subscription

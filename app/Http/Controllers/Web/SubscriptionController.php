@@ -8,6 +8,7 @@ use App\Models\Plan;
 use App\Services\Payment\PaymentService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionController extends Controller
 {
@@ -38,7 +39,12 @@ class SubscriptionController extends Controller
     public function checkout(Request $request, string $planSlug, string $interval = 'monthly')
     {
         $clinic = $this->getClinic();
-        $plan = Plan::where('slug', $planSlug)->where('is_active', true)->firstOrFail();
+        $plan = Plan::where('slug', $planSlug)->where('is_active', true)->first();
+
+        if (!$plan) {
+            return redirect()->route('pricing')
+                ->with('error', __('subscription.plan_not_found', ['plan' => $planSlug]));
+        }
 
         // Validate interval
         if (!in_array($interval, ['monthly', 'annual'])) {
@@ -51,14 +57,24 @@ class SubscriptionController extends Controller
         }
 
         try {
+            $currency = session('currency', config('app.locale_currencies.' . app()->getLocale(), 'eur'));
+
             $checkoutSession = $this->paymentService->createCheckoutSession($clinic, $plan, $interval, [
                 'trial_days' => config('plans.trial_days', 14),
+                'currency' => $currency,
             ]);
 
             return redirect($checkoutSession['url']);
         } catch (\Exception $e) {
+            Log::error('Checkout failed', [
+                'plan' => $planSlug,
+                'interval' => $interval,
+                'clinic_id' => $clinic->id,
+                'error' => $e->getMessage(),
+            ]);
+
             return redirect()->route('pricing')
-                ->with('error', __('subscription.checkout_error'));
+                ->with('error', __('subscription.checkout_error') . ' (' . $e->getMessage() . ')');
         }
     }
 

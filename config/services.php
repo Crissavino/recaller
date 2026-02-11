@@ -64,4 +64,11 @@ return [
         'sms_webhook_url' => env('TWILIO_SMS_WEBHOOK_URL'),
     ],
 
+    'messagebird' => [
+        'access_key' => env('MESSAGEBIRD_ACCESS_KEY'),
+        'signing_key' => env('MESSAGEBIRD_SIGNING_KEY'),
+        'voice_webhook_url' => env('MESSAGEBIRD_VOICE_WEBHOOK_URL'),
+        'sms_webhook_url' => env('MESSAGEBIRD_SMS_WEBHOOK_URL'),
+    ],
+
 ];

@@ -32,6 +32,10 @@ class EnsureSetupCompleted
             return $next($request);
         }
 
+        if ($user->isAdmin()) {
+            return $next($request);
+        }
+
         $clinic = $user->clinics()->first();
 
         // If user has no clinic or clinic hasn't completed setup, redirect to wizard

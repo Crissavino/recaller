@@ -1,5 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminPhoneNumberController;
+use App\Http\Controllers\Admin\AdminPlanController;
+use App\Http\Controllers\Admin\AdminSubscriptionController;
+use App\Http\Controllers\Admin\AdminTemplateController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Web\DashboardController;
@@ -20,6 +25,9 @@ Route::get('/', function () {
 
 // Language switcher
 Route::get('/locale/{locale}', [LocaleController::class, 'switch'])->name('locale.switch');
+
+// Currency switcher
+Route::get('/currency/{currency}', [LocaleController::class, 'switchCurrency'])->name('currency.switch');
 
 // Pricing page
 Route::get('/pricing', function () {
@@ -51,13 +59,7 @@ Route::middleware(['auth', 'verified', 'subscribed'])->group(function () {
     Route::get('/setup/welcome', [SetupWizardController::class, 'welcome'])->name('setup.welcome');
     Route::get('/setup/clinic', [SetupWizardController::class, 'clinic'])->name('setup.clinic');
     Route::post('/setup/clinic', [SetupWizardController::class, 'storeClinic'])->name('setup.store.clinic');
-    Route::get('/setup/phone', [SetupWizardController::class, 'provider'])->name('setup.provider');
-    Route::get('/setup/templates', [SetupWizardController::class, 'templates'])->name('setup.templates');
-    Route::post('/setup/templates', [SetupWizardController::class, 'storeTemplate'])->name('setup.store.template');
-    Route::post('/setup/templates/skip', [SetupWizardController::class, 'skipTemplates'])->name('setup.skip.templates');
-    Route::get('/setup/test', [SetupWizardController::class, 'test'])->name('setup.test');
-    Route::post('/setup/test', [SetupWizardController::class, 'sendTest'])->name('setup.send.test');
-    Route::post('/setup/test/skip', [SetupWizardController::class, 'skipTest'])->name('setup.skip.test');
+    Route::get('/setup/phone', [SetupWizardController::class, 'phone'])->name('setup.phone');
     Route::get('/setup/complete', [SetupWizardController::class, 'complete'])->name('setup.complete');
     Route::post('/setup/finish', [SetupWizardController::class, 'finish'])->name('setup.finish');
 });
@@ -77,8 +79,10 @@ Route::middleware(['auth', 'verified', 'setup.completed', 'subscribed'])->group(
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::get('/inbox', [InboxController::class, 'index'])->name('inbox.index');
+    Route::get('/inbox/unread-count', [InboxController::class, 'unreadCount'])->name('inbox.unread-count');
 
     Route::get('/conversations/{id}', [ConversationController::class, 'show'])->name('conversations.show');
+    Route::get('/conversations/{id}/messages', [ConversationController::class, 'messages'])->name('conversations.messages');
     Route::post('/conversations/{id}/reply', [ConversationController::class, 'reply'])->name('conversations.reply');
     Route::post('/conversations/{id}/outcome', [ConversationController::class, 'outcome'])->name('conversations.outcome');
 
@@ -100,6 +104,34 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Admin routes
+Route::middleware(['auth', 'verified', 'admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    // Phone Numbers Management
+    Route::get('/phone-numbers', [AdminPhoneNumberController::class, 'index'])->name('phone-numbers.index');
+    Route::post('/phone-numbers', [AdminPhoneNumberController::class, 'store'])->name('phone-numbers.store');
+    Route::put('/phone-numbers/{id}', [AdminPhoneNumberController::class, 'update'])->name('phone-numbers.update');
+    Route::patch('/phone-numbers/{id}/toggle', [AdminPhoneNumberController::class, 'toggle'])->name('phone-numbers.toggle');
+    Route::delete('/phone-numbers/{id}', [AdminPhoneNumberController::class, 'destroy'])->name('phone-numbers.destroy');
+
+    // Templates Management
+    Route::get('/templates', [AdminTemplateController::class, 'index'])->name('templates.index');
+    Route::put('/templates/{id}', [AdminTemplateController::class, 'update'])->name('templates.update');
+
+    // Plans & Prices
+    Route::get('/plans', [AdminPlanController::class, 'index'])->name('plans.index');
+    Route::put('/plans/{id}', [AdminPlanController::class, 'update'])->name('plans.update');
+    Route::patch('/plans/{id}/toggle-active', [AdminPlanController::class, 'toggleActive'])->name('plans.toggle-active');
+    Route::patch('/plans/{id}/toggle-featured', [AdminPlanController::class, 'toggleFeatured'])->name('plans.toggle-featured');
+    Route::post('/plan-prices', [AdminPlanController::class, 'storePrice'])->name('plan-prices.store');
+    Route::put('/plan-prices/{id}', [AdminPlanController::class, 'updatePrice'])->name('plan-prices.update');
+
+    // Subscriptions & Transactions
+    Route::get('/subscriptions', [AdminSubscriptionController::class, 'index'])->name('subscriptions.index');
+    Route::get('/subscriptions/transactions', [AdminSubscriptionController::class, 'transactions'])->name('subscriptions.transactions');
 });
 
 require __DIR__.'/auth.php';

@@ -39,6 +39,7 @@ return [
     'status_past_due' => 'Past Due',
 
     'checkout_error' => 'There was an error starting the checkout. Please try again.',
+    'plan_not_found' => 'The selected plan ":plan" is not available. Please choose another plan.',
     'billing_portal_error' => 'Could not open billing portal. Please try again.',
     'cancel_error' => 'There was an error cancelling your subscription. Please try again.',
     'resume_error' => 'There was an error resuming your subscription. Please try again.',

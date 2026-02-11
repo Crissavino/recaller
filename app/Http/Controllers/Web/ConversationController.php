@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Conversation;
 use App\UseCases\Messaging\SendReplyMessage;
 use App\UseCases\Leads\UpdateLeadOutcome;
+use App\Enums\MessageChannel;
 use App\Enums\OutcomeType;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -18,30 +20,83 @@ class ConversationController extends Controller
         $clinicId = $this->getClinicId($request);
 
         $conversation = Conversation::forClinic($clinicId)
-            ->with(['lead.caller', 'lead.outcome', 'messages'])
+            ->with(['lead.caller', 'lead.outcome', 'messages.sentByUser'])
             ->findOrFail($id);
 
         return view('inbox.show', compact('conversation'));
     }
 
-    public function reply(Request $request, int $id, SendReplyMessage $sendReplyMessage): RedirectResponse
+    public function reply(Request $request, int $id, SendReplyMessage $sendReplyMessage): JsonResponse|RedirectResponse
     {
         $request->validate([
             'body' => 'required|string|max:1600',
+            'channel' => 'nullable|string|in:sms,whatsapp',
         ]);
 
         $clinicId = $this->getClinicId($request);
 
         $conversation = Conversation::forClinic($clinicId)->findOrFail($id);
 
-        $sendReplyMessage->execute(
+        $channel = $request->input('channel')
+            ? MessageChannel::from($request->input('channel'))
+            : null;
+
+        $message = $sendReplyMessage->execute(
             conversationId: $conversation->id,
             body: $request->input('body'),
             sentByUserId: $request->user()->id,
+            channel: $channel,
         );
+
+        // Return JSON for AJAX requests
+        if ($request->expectsJson() || $request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => [
+                    'id' => $message->id,
+                    'body' => $message->body,
+                    'channel' => $message->channel->value,
+                    'direction' => $message->direction->value,
+                    'status' => $message->status,
+                    'created_at' => $message->created_at->format('M d, g:i A'),
+                    'sent_by' => $message->sentByUser?->name ?? __('inbox.auto'),
+                ],
+            ]);
+        }
 
         return redirect()->route('conversations.show', $id)
             ->with('success', 'Message sent');
+    }
+
+    public function messages(Request $request, int $id): JsonResponse
+    {
+        $clinicId = $this->getClinicId($request);
+
+        $conversation = Conversation::forClinic($clinicId)
+            ->with(['messages.sentByUser'])
+            ->findOrFail($id);
+
+        // Get messages after a certain ID if provided (for polling)
+        $afterId = $request->query('after_id', 0);
+
+        $messages = $conversation->messages
+            ->where('id', '>', $afterId)
+            ->map(fn ($m) => [
+                'id' => $m->id,
+                'body' => $m->body,
+                'channel' => $m->channel->value,
+                'direction' => $m->direction->value,
+                'status' => $m->status,
+                'created_at' => $m->created_at->format('M d, g:i A'),
+                'sent_by' => $m->sentByUser?->name ?? ($m->isOutbound() ? __('inbox.auto') : null),
+                'is_outbound' => $m->isOutbound(),
+            ])
+            ->values();
+
+        return response()->json([
+            'messages' => $messages,
+            'last_id' => $conversation->messages->max('id') ?? 0,
+        ]);
     }
 
     public function outcome(Request $request, int $id, UpdateLeadOutcome $updateLeadOutcome): RedirectResponse

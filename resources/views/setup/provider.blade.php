@@ -9,8 +9,25 @@
         <h1 class="wizard-title">{{ __('setup.phone_title') }}</h1>
         <p class="wizard-subtitle">{{ __('setup.phone_subtitle') }}</p>
 
-        @if($phoneNumber)
-            {{-- User has an assigned phone number --}}
+        {{-- Clinic phone display --}}
+        <div style="background: #f9fafb; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <p style="font-size: 13px; color: #6b7280; margin: 0 0 4px 0;">{{ __('setup.clinic_phone') }}</p>
+            <p style="font-size: 20px; font-weight: 600; color: #111827; margin: 0;">{{ $clinic->phone }}</p>
+        </div>
+
+        {{-- How it works --}}
+        <div style="background: #f0f9ff; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
+            <p style="font-weight: 600; color: #0369a1; margin: 0 0 12px 0;">{{ __('setup.phone_how_it_works') }}</p>
+            <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 14px; line-height: 1.8;">
+                <li>{{ __('setup.phone_flow_1') }}</li>
+                <li>{{ __('setup.phone_flow_2') }}</li>
+                <li>{{ __('setup.phone_flow_3') }}</li>
+                <li>{{ __('setup.phone_flow_4') }}</li>
+            </ol>
+        </div>
+
+        @if($recallerNumber)
+            {{-- Recaller number assigned --}}
             <div style="background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%); border: 2px solid #86efac; border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: center;">
                 <div style="width: 64px; height: 64px; background: #22c55e; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                     <svg width="32" height="32" fill="white" viewBox="0 0 20 20">
@@ -18,34 +35,19 @@
                     </svg>
                 </div>
                 <p style="font-size: 14px; color: #166534; margin: 0 0 8px 0; font-weight: 500;">{{ __('setup.your_recaller_number') }}</p>
-                <p style="font-size: 28px; font-weight: 700; color: #15803d; margin: 0; letter-spacing: 1px;">{{ $phoneNumber->phone_number }}</p>
+                <p style="font-size: 28px; font-weight: 700; color: #15803d; margin: 0; letter-spacing: 1px;">{{ $recallerNumber->phone_number }}</p>
             </div>
 
             <div style="background: #f0f9ff; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
                 <p style="font-weight: 600; color: #0369a1; margin: 0 0 12px 0;">{{ __('setup.phone_instructions_title') }}</p>
                 <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 14px; line-height: 1.8;">
                     <li>{{ __('setup.phone_instruction_1') }}</li>
-                    <li>{{ __('setup.phone_instruction_2', ['number' => $phoneNumber->phone_number]) }}</li>
+                    <li>{{ __('setup.phone_instruction_2', ['number' => $recallerNumber->phone_number]) }}</li>
                     <li>{{ __('setup.phone_instruction_3') }}</li>
                 </ol>
             </div>
-
-            <div class="wizard-actions">
-                <a href="{{ route('setup.clinic') }}" class="btn btn-outline">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
-                    </svg>
-                    {{ __('common.back') }}
-                </a>
-                <a href="{{ route('setup.templates') }}" class="btn btn-primary">
-                    {{ __('common.next') }}
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                    </svg>
-                </a>
-            </div>
         @else
-            {{-- No phone number assigned yet --}}
+            {{-- No Recaller number yet --}}
             <div style="background: linear-gradient(135deg, #fefce8 0%, #fef9c3 100%); border: 2px solid #fde047; border-radius: 16px; padding: 24px; margin-bottom: 24px; text-align: center;">
                 <div style="width: 64px; height: 64px; background: #eab308; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px;">
                     <svg width="32" height="32" fill="white" viewBox="0 0 20 20">
@@ -55,30 +57,21 @@
                 <p style="font-size: 18px; font-weight: 600; color: #854d0e; margin: 0 0 8px 0;">{{ __('setup.phone_pending_title') }}</p>
                 <p style="font-size: 14px; color: #a16207; margin: 0;">{{ __('setup.phone_pending_desc') }}</p>
             </div>
-
-            <div style="background: #f9fafb; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                <p style="font-weight: 600; color: #374151; margin: 0 0 12px 0;">{{ __('setup.phone_what_happens') }}</p>
-                <ul style="margin: 0; padding-left: 20px; color: #6b7280; font-size: 14px; line-height: 1.8;">
-                    <li>{{ __('setup.phone_what_1') }}</li>
-                    <li>{{ __('setup.phone_what_2') }}</li>
-                    <li>{{ __('setup.phone_what_3') }}</li>
-                </ul>
-            </div>
-
-            <div class="wizard-actions">
-                <a href="{{ route('setup.clinic') }}" class="btn btn-outline">
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
-                    </svg>
-                    {{ __('common.back') }}
-                </a>
-                <a href="{{ route('setup.templates') }}" class="btn btn-primary">
-                    {{ __('setup.phone_continue_anyway') }}
-                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
-                    </svg>
-                </a>
-            </div>
         @endif
+
+        <div class="wizard-actions">
+            <a href="{{ route('setup.clinic') }}" class="btn btn-outline">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 17l-5-5m0 0l5-5m-5 5h12"/>
+                </svg>
+                {{ __('common.back') }}
+            </a>
+            <a href="{{ route('setup.complete') }}" class="btn btn-primary">
+                {{ __('common.next') }}
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+            </a>
+        </div>
     </div>
 </x-setup.layout>

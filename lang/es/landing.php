@@ -37,8 +37,13 @@ return [
         'benefit3' => 'Responde desde el dashboard o tu teléfono',
         'benefit4' => 'Métricas de cuánto dinero recuperas',
         'cta' => 'Empezar ahora',
+        'demo_phone' => '+34 612 345 678',
         'demo_responded' => 'Respondió hace 2 min',
         'demo_booked' => 'Cita agendada · +€120 recuperados',
+        'demo_msg1' => '¡Hola! Vimos que llamaste a Dental Smile pero no pudimos atenderte. ¿Te podemos ayudar a agendar una cita?',
+        'demo_msg2' => 'Hola! Sí, quería ver si tienen turno para una limpieza esta semana',
+        'demo_msg3' => '¡Claro! Tenemos disponible jueves a las 3pm o viernes a las 10am. ¿Cuál te queda mejor?',
+        'demo_msg4' => 'Jueves a las 3pm perfecto 👍',
     ],
 
     'steps' => [
@@ -47,7 +52,7 @@ return [
         'subtitle' => '4 pasos automáticos que recuperan pacientes mientras tú atiendes a otros',
         'step1_title' => 'Llamada perdida',
         'step1_text' => 'Un paciente llama pero nadie puede atender',
-        'step2_title' => 'SMS automático',
+        'step2_title' => 'WhatsApp automático',
         'step2_text' => 'En 60 seg recibe un mensaje personalizado',
         'step3_title' => 'Conversación',
         'step3_text' => 'El paciente responde y continúas el chat',

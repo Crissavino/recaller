@@ -25,8 +25,10 @@ Route::prefix('webhooks')->group(function () {
     Route::prefix('twilio')->middleware(VerifyTwilioSignature::class)->group(function () {
         Route::post('/voice', [TwilioWebhookController::class, 'voice'])->name('webhooks.twilio.voice');
         Route::post('/voice/status', [TwilioWebhookController::class, 'voiceStatus'])->name('webhooks.twilio.voice.status');
+        Route::post('/voice/forward-result', [TwilioWebhookController::class, 'forwardResult'])->name('webhooks.twilio.voice.forward-result');
         Route::post('/sms', [TwilioWebhookController::class, 'sms'])->name('webhooks.twilio.sms');
         Route::post('/sms/status', [TwilioWebhookController::class, 'smsStatus'])->name('webhooks.twilio.sms.status');
+        Route::post('/whatsapp', [TwilioWebhookController::class, 'whatsapp'])->name('webhooks.twilio.whatsapp');
     });
 
     // Vonage webhooks

@@ -954,6 +954,7 @@
                 <a href="#como-funciona">{{ __('nav.how_it_works') }}</a>
                 <a href="#pricing">{{ __('nav.pricing') }}</a>
                 <div class="lang-selector">
+                    <a href="{{ route('locale.switch', 'ro') }}" class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}">RO</a>
                     <a href="{{ route('locale.switch', 'es') }}" class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">ES</a>
                     <a href="{{ route('locale.switch', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">EN</a>
                 </div>
@@ -1039,15 +1040,15 @@
                     <div class="demo-header">
                         <div class="demo-avatar">MG</div>
                         <div class="demo-info">
-                            <h4>+34 612 345 678</h4>
+                            <h4>{{ __('landing.solution.demo_phone') }}</h4>
                             <span>{{ __('landing.solution.demo_responded') }}</span>
                         </div>
                     </div>
                     <div class="demo-messages">
-                        <div class="demo-msg out">Hola! Vimos que llamaste a Dental Smile pero no pudimos atenderte. ¿Te podemos ayudar a agendar una cita?</div>
-                        <div class="demo-msg in">Hola! Sí, quería ver si tienen turno para una limpieza esta semana</div>
-                        <div class="demo-msg out">¡Claro! Tenemos disponible jueves a las 3pm o viernes a las 10am. ¿Cuál te queda mejor?</div>
-                        <div class="demo-msg in">Jueves a las 3pm perfecto 👍</div>
+                        <div class="demo-msg out">{{ __('landing.solution.demo_msg1') }}</div>
+                        <div class="demo-msg in">{{ __('landing.solution.demo_msg2') }}</div>
+                        <div class="demo-msg out">{{ __('landing.solution.demo_msg3') }}</div>
+                        <div class="demo-msg in">{{ __('landing.solution.demo_msg4') }}</div>
                     </div>
                     <div class="demo-time">{{ __('landing.solution.demo_booked') }}</div>
                 </div>
@@ -1140,16 +1141,23 @@
             <span class="pricing-save-badge">{{ __('landing.pricing.save_badge') }}</span>
         </div>
 
+        <div class="currency-selector" style="display: flex; align-items: center; justify-content: center; gap: 6px; margin-bottom: 32px;">
+            <a href="{{ route('currency.switch', 'eur') }}" style="padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; {{ $currentCurrency === 'eur' ? 'background: rgba(14,165,233,0.2); border: 1px solid #0ea5e9; color: #7dd3fc;' : 'color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);' }}">EUR (€)</a>
+            <a href="{{ route('currency.switch', 'ron') }}" style="padding: 6px 14px; border-radius: 50px; font-size: 13px; font-weight: 600; text-decoration: none; transition: all 0.2s; {{ $currentCurrency === 'ron' ? 'background: rgba(14,165,233,0.2); border: 1px solid #0ea5e9; color: #7dd3fc;' : 'color: #94a3b8; border: 1px solid rgba(255,255,255,0.1);' }}">RON</a>
+        </div>
+
+        @php $prices = config('pricing.plans'); @endphp
+
         <div class="pricing-grid">
             <!-- Starter Plan -->
             <div class="pricing-card">
                 <h3 class="pricing-card-name">{{ __('landing.pricing.starter.name') }}</h3>
                 <p class="pricing-card-desc">{{ __('landing.pricing.starter.description') }}</p>
                 <div class="price price-monthly">
-                    <span class="currency">€</span>{{ __('landing.pricing.starter.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['starter'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <div class="price price-annual">
-                    <span class="currency">€</span>{{ __('landing.pricing.starter.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['starter'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
                 <ul class="pricing-features">
@@ -1158,7 +1166,7 @@
                     @endforeach
                 </ul>
                 <a href="{{ route('register', ['plan' => 'starter', 'interval' => 'monthly']) }}" class="btn btn-secondary plan-btn" data-plan="starter">{{ __('landing.pricing.cta') }}</a>
-                <p class="pricing-sms-note">{{ __('landing.pricing.starter.sms_extra') }}</p>
+                <p class="pricing-sms-note">{{ $prices['starter'][$currentCurrency]['sms_extra'] }}</p>
             </div>
 
             <!-- Growth Plan (Popular) -->
@@ -1166,10 +1174,10 @@
                 <h3 class="pricing-card-name">{{ __('landing.pricing.growth.name') }}</h3>
                 <p class="pricing-card-desc">{{ __('landing.pricing.growth.description') }}</p>
                 <div class="price price-monthly">
-                    <span class="currency">€</span>{{ __('landing.pricing.growth.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['growth'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <div class="price price-annual">
-                    <span class="currency">€</span>{{ __('landing.pricing.growth.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['growth'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
                 <ul class="pricing-features">
@@ -1178,7 +1186,7 @@
                     @endforeach
                 </ul>
                 <a href="{{ route('register', ['plan' => 'growth', 'interval' => 'monthly']) }}" class="btn btn-primary plan-btn" data-plan="growth">{{ __('landing.pricing.cta') }}</a>
-                <p class="pricing-sms-note">{{ __('landing.pricing.growth.sms_extra') }}</p>
+                <p class="pricing-sms-note">{{ $prices['growth'][$currentCurrency]['sms_extra'] }}</p>
             </div>
 
             <!-- Pro Plan -->
@@ -1186,10 +1194,10 @@
                 <h3 class="pricing-card-name">{{ __('landing.pricing.pro.name') }}</h3>
                 <p class="pricing-card-desc">{{ __('landing.pricing.pro.description') }}</p>
                 <div class="price price-monthly">
-                    <span class="currency">€</span>{{ __('landing.pricing.pro.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['pro'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <div class="price price-annual">
-                    <span class="currency">€</span>{{ __('landing.pricing.pro.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                    <span class="currency">{{ $currencySymbol }}</span>{{ $prices['pro'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
                 </div>
                 <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
                 <ul class="pricing-features">
@@ -1198,7 +1206,7 @@
                     @endforeach
                 </ul>
                 <a href="{{ route('register', ['plan' => 'pro', 'interval' => 'monthly']) }}" class="btn btn-secondary plan-btn" data-plan="pro">{{ __('landing.pricing.cta') }}</a>
-                <p class="pricing-sms-note">{{ __('landing.pricing.pro.sms_extra') }}</p>
+                <p class="pricing-sms-note">{{ $prices['pro'][$currentCurrency]['sms_extra'] }}</p>
             </div>
         </div>
 

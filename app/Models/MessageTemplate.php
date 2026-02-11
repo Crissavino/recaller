@@ -15,6 +15,7 @@ class MessageTemplate extends Model
         'clinic_id',
         'name',
         'channel',
+        'content_sid',
         'trigger_event',
         'body',
         'is_active',

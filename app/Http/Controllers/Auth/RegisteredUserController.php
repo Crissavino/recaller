@@ -47,7 +47,7 @@ class RegisteredUserController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $request->validate([
-            'name' => ['required', 'string', 'max:255'],
+            'clinic_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
             'terms' => ['required', 'accepted'],
@@ -57,7 +57,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user = User::create([
-            'name' => $request->name,
+            'name' => $request->clinic_name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'terms_accepted_at' => now(),
@@ -65,8 +65,8 @@ class RegisteredUserController extends Controller
 
         // Create a default clinic for the user
         $clinic = Clinic::create([
-            'name' => $request->name . "'s Clinic",
-            'slug' => Str::slug($request->name . '-' . Str::random(6)),
+            'name' => $request->clinic_name,
+            'slug' => Str::slug($request->clinic_name . '-' . Str::random(6)),
             'timezone' => 'America/New_York',
             'is_active' => true,
         ]);

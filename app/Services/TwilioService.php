@@ -56,6 +56,62 @@ class TwilioService implements SmsProviderInterface
         }
     }
 
+    public function sendWhatsApp(Message $message, ?string $contentSid = null, array $contentVariables = []): bool
+    {
+        if (!$this->client) {
+            Log::error('TwilioService: Twilio credentials not configured');
+            return false;
+        }
+
+        try {
+            $to = $this->formatWhatsAppNumber($message->to_phone);
+            $from = $this->formatWhatsAppNumber($message->from_phone);
+
+            $params = ['from' => $from];
+
+            if ($contentSid) {
+                // Use Content Template (required for business-initiated WhatsApp)
+                $params['contentSid'] = $contentSid;
+                if (!empty($contentVariables)) {
+                    $params['contentVariables'] = json_encode($contentVariables);
+                }
+            } else {
+                // Fallback to body (only works within 24h user-initiated window)
+                $params['body'] = $message->body;
+            }
+
+            $twilioMessage = $this->client->messages->create($to, $params);
+
+            $message->update([
+                'provider_message_id' => $twilioMessage->sid,
+                'status' => 'sent',
+                'sent_at' => now(),
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            Log::error('TwilioService: Failed to send WhatsApp', [
+                'message_id' => $message->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            $message->update(['status' => 'failed']);
+
+            return false;
+        }
+    }
+
+    private function formatWhatsAppNumber(string $phone): string
+    {
+        // If already in whatsapp: format, return as is
+        if (str_starts_with($phone, 'whatsapp:')) {
+            return $phone;
+        }
+
+        // Otherwise, add whatsapp: prefix
+        return 'whatsapp:' . $phone;
+    }
+
     public function getProviderName(): string
     {
         return 'twilio';

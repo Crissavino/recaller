@@ -39,6 +39,7 @@ return [
     'status_past_due' => 'Pago atrasado',
 
     'checkout_error' => 'Hubo un error al iniciar el pago. Por favor intenta de nuevo.',
+    'plan_not_found' => 'El plan seleccionado ":plan" no esta disponible. Por favor elige otro plan.',
     'billing_portal_error' => 'No se pudo abrir el portal de facturacion. Por favor intenta de nuevo.',
     'cancel_error' => 'Hubo un error al cancelar tu suscripcion. Por favor intenta de nuevo.',
     'resume_error' => 'Hubo un error al reactivar tu suscripcion. Por favor intenta de nuevo.',

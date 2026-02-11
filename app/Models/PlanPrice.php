@@ -14,6 +14,7 @@ class PlanPrice extends Model
         'plan_id',
         'provider',
         'interval',
+        'currency',
         'provider_price_id',
         'provider_product_id',
         'provider_data',
@@ -47,6 +48,14 @@ class PlanPrice extends Model
     public function scopeForInterval($query, string $interval)
     {
         return $query->where('interval', $interval);
+    }
+
+    /**
+     * Scope to filter by currency.
+     */
+    public function scopeForCurrency($query, string $currency)
+    {
+        return $query->where('currency', $currency);
     }
 
     /**

@@ -20,6 +20,7 @@ class ReceiveIncomingMessage
         string $toPhone,
         string $body,
         ?string $providerMessageId = null,
+        MessageChannel $channel = MessageChannel::SMS,
     ): ?Message {
         $caller = Caller::where('clinic_id', $clinicId)
             ->where('phone', $fromPhone)
@@ -45,7 +46,7 @@ class ReceiveIncomingMessage
         $message = Message::create([
             'clinic_id' => $clinicId,
             'conversation_id' => $conversation->id,
-            'channel' => MessageChannel::SMS,
+            'channel' => $channel,
             'direction' => MessageDirection::INBOUND,
             'from_phone' => $fromPhone,
             'to_phone' => $toPhone,
@@ -55,6 +56,11 @@ class ReceiveIncomingMessage
         ]);
 
         $conversation->updateLastMessageTimestamp();
+
+        // Update conversation channel if different from current message
+        if ($conversation->channel !== $channel) {
+            $conversation->update(['channel' => $channel]);
+        }
 
         $lead = $conversation->lead;
         if ($lead && $lead->stage === LeadStage::CONTACTED) {

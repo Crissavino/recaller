@@ -17,31 +17,48 @@ return [
     // Step 2: Clinic
     'clinic_title' => 'Tu Clinica',
     'clinic_subtitle' => 'Cuentanos sobre tu practica para personalizar tus mensajes.',
-
-    // Step 3: Your Phone Number
-    'phone_title' => 'Tu Numero de Telefono',
-    'phone_subtitle' => 'Este es tu numero dedicado de Recaller. Las llamadas perdidas a este numero activaran seguimientos automaticos.',
-    'your_recaller_number' => 'Tu Numero de Recaller',
-    'phone_instructions_title' => 'Como configurar el desvio de llamadas:',
-    'phone_instruction_1' => 'Contacta a tu proveedor de telefonia o administrador de PBX',
-    'phone_instruction_2' => 'Configura el desvio de llamadas no contestadas a :number',
-    'phone_instruction_3' => 'Prueba llamando a tu clinica y no contestando',
-    'phone_pending_title' => 'Configurando tu numero...',
-    'phone_pending_desc' => 'Estamos asignando un numero de telefono a tu cuenta. Esto normalmente toma menos de 24 horas.',
-    'phone_what_happens' => 'Que pasa ahora?',
-    'phone_what_1' => 'Te asignaremos un numero de telefono dedicado',
-    'phone_what_2' => 'Recibiras un email cuando este listo',
-    'phone_what_3' => 'Luego podras configurar el desvio de llamadas desde tu clinica',
-    'phone_continue_anyway' => 'Continuar Configuracion',
     'clinic_name' => 'Nombre de la Clinica',
     'clinic_name_placeholder' => 'ej. Dental Sonrisa Brillante',
+    'clinic_phone' => 'Telefono de la Clinica',
+    'clinic_phone_placeholder' => 'ej. +54 11 1234 5678',
+    'clinic_phone_help' => 'El numero al que llaman tus pacientes. Lo usaremos para configurar el desvio de llamadas.',
     'booking_link' => 'Link de Reservas',
     'booking_link_help' => 'Los pacientes pueden hacer clic aqui para agendar citas',
     'business_hours' => 'Horario de Atencion',
     'business_hours_placeholder' => 'Lun-Vie 9am-6pm',
     'business_hours_help' => 'Informa a los pacientes cuando estas disponible',
 
-    // Step 4: Templates
+    // Step 3: Phone Setup
+    'phone_title' => 'Configuracion de Telefono',
+    'phone_subtitle' => 'Asi es como Recaller funciona con el telefono de tu clinica.',
+    'phone_how_it_works' => 'Como funciona:',
+    'phone_flow_1' => 'Un paciente llama al numero de tu clinica',
+    'phone_flow_2' => 'La llamada se desvia a tu numero de Recaller',
+    'phone_flow_3' => 'Intentamos conectar la llamada con tu clinica',
+    'phone_flow_4' => 'Si no se atiende, enviamos un seguimiento automatico por SMS',
+    'your_recaller_number' => 'Tu Numero de Recaller',
+    'phone_instructions_title' => 'Como configurar el desvio de llamadas:',
+    'phone_instruction_1' => 'Contacta a tu proveedor de telefonia o administrador de PBX',
+    'phone_instruction_2' => 'Configura el desvio de llamadas no contestadas a :number',
+    'phone_instruction_3' => 'Prueba llamando a tu clinica y no contestando',
+    'phone_pending_title' => 'Configurando tu numero...',
+    'phone_pending_desc' => 'Estamos asignando un numero de Recaller a tu cuenta. Esto normalmente toma menos de 24 horas.',
+    'phone_what_happens' => 'Que pasa ahora?',
+    'phone_what_1' => 'Te asignaremos un numero de telefono dedicado',
+    'phone_what_2' => 'Recibiras un email cuando este listo',
+    'phone_what_3' => 'Luego podras configurar el desvio de llamadas desde tu clinica',
+    'phone_continue_anyway' => 'Continuar Configuracion',
+
+    // Step 4: Complete
+    'complete_title' => 'Todo Listo!',
+    'complete_subtitle' => 'Tu clinica esta lista para comenzar a recuperar llamadas perdidas.',
+    'whats_next' => 'Que sigue?',
+    'next_step_1' => 'Cuando tu numero de Recaller este asignado, configura el desvio de llamadas desde tu clinica',
+    'next_step_2' => 'Las llamadas perdidas activaran automaticamente seguimientos por SMS y apareceran en tu dashboard',
+    'go_to_dashboard' => 'Ir al Dashboard',
+    'welcome_complete' => 'Configuracion completa! Bienvenido a Recaller.',
+
+    // Legacy keys (templates/test - kept for backwards compatibility)
     'templates_title' => 'Tu Primer Mensaje',
     'templates_subtitle' => 'Crea el mensaje que se enviara automaticamente cuando pierdas una llamada.',
     'template_name' => 'Nombre del Template',
@@ -51,8 +68,6 @@ return [
     'default_template_body' => 'Hola! Notamos que llamaste a {{clinic_name}}. Disculpa que no pudimos atenderte! Como podemos ayudarte hoy?',
     'available_variables' => 'Variables disponibles',
     'skip_step' => 'Saltar este paso',
-
-    // Step 5: Test
     'test_title' => 'Prueba tu Configuracion',
     'test_subtitle' => 'Envia un SMS de prueba para verificar que todo funciona correctamente.',
     'phone_ready' => 'Numero de Telefono Listo',
@@ -66,14 +81,4 @@ return [
     'no_phone_desc' => 'Contacta a soporte para configurar tu numero de telefono. Puedes continuar y probar despues.',
     'no_phone_configured' => 'No hay numero de telefono configurado para tu clinica.',
     'default_test_message' => 'Hola! Este es un mensaje de prueba de :clinic. Tu configuracion funciona correctamente!',
-
-    // Step 6: Complete
-    'complete_title' => 'Todo Listo!',
-    'complete_subtitle' => 'Tu clinica esta lista para comenzar a recuperar llamadas perdidas.',
-    'whats_next' => 'Que sigue?',
-    'next_step_1' => 'Redirige las llamadas de tu clinica a tu numero de Recaller',
-    'next_step_2' => 'Las llamadas perdidas activaran automaticamente seguimientos por SMS',
-    'next_step_3' => 'Rastrea tus conversaciones e ingresos recuperados en el dashboard',
-    'go_to_dashboard' => 'Ir al Dashboard',
-    'welcome_complete' => 'Configuracion completa! Bienvenido a Recaller.',
 ];

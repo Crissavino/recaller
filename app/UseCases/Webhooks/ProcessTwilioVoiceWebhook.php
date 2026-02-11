@@ -23,10 +23,17 @@ class ProcessTwilioVoiceWebhook
         }
 
         if ($this->alreadyProcessed($callSid)) {
+            Log::info('Twilio voice webhook already processed', ['call_sid' => $callSid]);
             return;
         }
 
+        // Try to find clinic phone number - check both 'Called' and 'To'
+        // In forward results, 'Called' is the forward-to number, but 'To' is the Twilio number
         $clinicPhoneNumber = $this->findClinicPhoneNumber($payload['Called'] ?? null);
+
+        if (!$clinicPhoneNumber) {
+            $clinicPhoneNumber = $this->findClinicPhoneNumber($payload['To'] ?? null);
+        }
 
         if (!$clinicPhoneNumber) {
             Log::warning('Twilio voice webhook for unknown number', $payload);
@@ -62,8 +69,16 @@ class ProcessTwilioVoiceWebhook
             return null;
         }
 
-        return ClinicPhoneNumber::where('phone_number', $phoneNumber)
-            ->where('is_active', true)
+        // Normalize phone number - try with and without +
+        $normalized = ltrim($phoneNumber, '+');
+        $withPlus = '+' . $normalized;
+
+        return ClinicPhoneNumber::where('is_active', true)
+            ->where(function ($query) use ($phoneNumber, $normalized, $withPlus) {
+                $query->where('phone_number', $phoneNumber)
+                    ->orWhere('phone_number', $normalized)
+                    ->orWhere('phone_number', $withPlus);
+            })
             ->first();
     }
 
@@ -80,9 +95,18 @@ class ProcessTwilioVoiceWebhook
 
     private function isMissedCall(array $payload): bool
     {
+        // For forward results, check DialCallStatus
+        $dialCallStatus = $payload['DialCallStatus'] ?? null;
+        if ($dialCallStatus) {
+            // If the forwarded call was not answered
+            return in_array($dialCallStatus, ['no-answer', 'busy', 'failed', 'canceled']);
+        }
+
+        // For direct calls (no forwarding), check CallStatus
         $callStatus = $payload['CallStatus'] ?? '';
 
-        return in_array($callStatus, ['no-answer', 'busy', 'canceled']);
+        // Include 'ringing' for numbers without forwarding configured
+        return in_array($callStatus, ['ringing', 'in-progress', 'no-answer', 'busy', 'canceled']);
     }
 
     private function calculateRingDuration(array $payload): ?int

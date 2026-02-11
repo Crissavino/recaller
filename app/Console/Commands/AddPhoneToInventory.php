@@ -9,9 +9,9 @@ class AddPhoneToInventory extends Command
 {
     protected $signature = 'phone:add
                             {phone : The phone number (e.g. +1234567890)}
-                            {--provider=twilio : The SMS provider}
-                            {--sid= : The provider SID (e.g. PNxxxxx)}
-                            {--country=ES : Country code (e.g. ES, US, MX)}
+                            {--provider=twilio : The SMS provider (twilio, vonage, messagebird)}
+                            {--sid= : The provider SID/ID (e.g. PNxxxxx for Twilio)}
+                            {--country=ES : Country code (e.g. ES, RO, US)}
                             {--cost= : Monthly cost}';
 
     protected $description = 'Add a phone number to Recaller inventory';

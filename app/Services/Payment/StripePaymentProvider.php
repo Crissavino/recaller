@@ -106,10 +106,11 @@ class StripePaymentProvider implements PaymentProviderInterface
         array $options = []
     ): array {
         $customer = $this->getOrCreateCustomer($clinic);
-        $planPrice = $plan->getPriceFor(self::NAME, $interval);
+        $currency = $options['currency'] ?? 'eur';
+        $planPrice = $plan->getPriceFor(self::NAME, $interval, $currency);
 
         if (!$planPrice) {
-            throw new \RuntimeException("No Stripe price found for plan {$plan->slug} with interval {$interval}");
+            throw new \RuntimeException("No Stripe price found for plan {$plan->slug} with interval {$interval} and currency {$currency}");
         }
 
         $sessionParams = [
@@ -152,10 +153,11 @@ class StripePaymentProvider implements PaymentProviderInterface
         array $options = []
     ): ClinicSubscription {
         $customer = $this->getOrCreateCustomer($clinic);
-        $planPrice = $plan->getPriceFor(self::NAME, $interval);
+        $currency = $options['currency'] ?? 'eur';
+        $planPrice = $plan->getPriceFor(self::NAME, $interval, $currency);
 
         if (!$planPrice) {
-            throw new \RuntimeException("No Stripe price found for plan {$plan->slug} with interval {$interval}");
+            throw new \RuntimeException("No Stripe price found for plan {$plan->slug} with interval {$interval} and currency {$currency}");
         }
 
         $subscriptionParams = [
@@ -229,10 +231,14 @@ class StripePaymentProvider implements PaymentProviderInterface
 
     public function changePlan(ClinicSubscription $subscription, Plan $newPlan, string $interval): ClinicSubscription
     {
-        $planPrice = $newPlan->getPriceFor(self::NAME, $interval);
+        // Determine currency from current subscription's price
+        $currentPrice = PlanPrice::findByProviderPriceId(self::NAME, $subscription->provider_price_id);
+        $currency = $currentPrice?->currency ?? 'eur';
+
+        $planPrice = $newPlan->getPriceFor(self::NAME, $interval, $currency);
 
         if (!$planPrice) {
-            throw new \RuntimeException("No Stripe price found for plan {$newPlan->slug} with interval {$interval}");
+            throw new \RuntimeException("No Stripe price found for plan {$newPlan->slug} with interval {$interval} and currency {$currency}");
         }
 
         $stripeSubscription = Subscription::retrieve($subscription->provider_subscription_id);
@@ -293,6 +299,15 @@ class StripePaymentProvider implements PaymentProviderInterface
                 }
 
                 $clinic = Clinic::find($clinicId);
+
+                if (!$clinic) {
+                    Log::warning('Clinic not found for Stripe subscription', [
+                        'subscription_id' => $providerSubscriptionId,
+                        'clinic_id' => $clinicId,
+                    ]);
+                    return null;
+                }
+
                 $planPrice = PlanPrice::findByProviderPriceId(
                     self::NAME,
                     $stripeSubscription->items->data[0]->price->id

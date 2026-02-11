@@ -20,6 +20,7 @@ class User extends Authenticatable
         'password',
         'phone',
         'is_active',
+        'is_admin',
         'terms_accepted_at',
         'notification_preferences',
     ];
@@ -35,9 +36,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'is_active' => 'boolean',
+            'is_admin' => 'boolean',
             'terms_accepted_at' => 'datetime',
             'notification_preferences' => 'array',
         ];
+    }
+
+    public function isAdmin(): bool
+    {
+        return $this->is_admin === true;
     }
 
     /**

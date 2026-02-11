@@ -47,15 +47,28 @@ class Plan extends Model
     }
 
     /**
-     * Get price for a specific provider and interval.
+     * Get price for a specific provider, interval, and currency.
      */
-    public function getPriceFor(string $provider, string $interval): ?PlanPrice
+    public function getPriceFor(string $provider, string $interval, string $currency = 'eur'): ?PlanPrice
     {
         return $this->prices()
             ->where('provider', $provider)
             ->where('interval', $interval)
+            ->where('currency', $currency)
             ->where('is_active', true)
             ->first();
+    }
+
+    /**
+     * Get currency symbol for display.
+     */
+    public static function getCurrencySymbol(string $currency): string
+    {
+        return match ($currency) {
+            'ron' => 'RON ',
+            'eur' => '€',
+            default => strtoupper($currency) . ' ',
+        };
     }
 
     /**

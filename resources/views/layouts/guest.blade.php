@@ -339,6 +339,7 @@
                     Recaller
                 </a>
                 <div class="lang-switch">
+                    <a href="{{ route('locale.switch', 'ro') }}" class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}">RO</a>
                     <a href="{{ route('locale.switch', 'es') }}" class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">ES</a>
                     <a href="{{ route('locale.switch', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">EN</a>
                 </div>

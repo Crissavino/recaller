@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'title' => 'Rapoarte',
+    'period' => 'Perioada',
+    'last_7_days' => 'Ultimele 7 zile',
+    'last_30_days' => 'Ultimele 30 zile',
+    'last_90_days' => 'Ultimele 90 zile',
+    'this_month' => 'Luna aceasta',
+    'last_month' => 'Luna trecuta',
+    'total_calls' => 'Total apeluri',
+    'total_recovered' => 'Total recuperat',
+    'conversion_rate' => 'Rata de conversie',
+    'avg_value' => 'Valoare medie',
+    'response_rate' => 'Rata de raspuns',
+    'messages' => 'mesaje',
+    'recovered_period' => 'recuperat in aceasta perioada',
+    'revenue_over_time' => 'Venituri in Timp',
+    'lead_funnel' => 'Palnie Lead-uri',
+    'outcome_breakdown' => 'Defalcarea Rezultatelor',
+    'total_outcomes' => 'total rezultate',
+    'no_data' => 'Nu exista date pentru aceasta perioada',
+    'no_outcomes' => 'Niciun rezultat inregistrat inca',
+    'conversion' => 'conversie',
+];

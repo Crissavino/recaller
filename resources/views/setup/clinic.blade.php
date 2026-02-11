@@ -27,6 +27,12 @@
             </div>
 
             <div class="form-group">
+                <label class="form-label">{{ __('setup.clinic_phone') }} *</label>
+                <input type="tel" name="phone" class="form-input" value="{{ old('phone', $clinic->phone) }}" required placeholder="{{ __('setup.clinic_phone_placeholder') }}">
+                <span class="form-help">{{ __('setup.clinic_phone_help') }}</span>
+            </div>
+
+            <div class="form-group">
                 <label class="form-label">{{ __('setup.booking_link') }}</label>
                 <input type="url" name="booking_link" class="form-input" value="{{ old('booking_link', $clinic->settings?->booking_link) }}" placeholder="https://your-booking-page.com">
                 <span class="form-help">{{ __('setup.booking_link_help') }}</span>

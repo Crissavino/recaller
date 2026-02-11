@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\UseCases\Messaging\SendFollowUpSms;
+use App\UseCases\Messaging\SendFollowUpMessage;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
 
@@ -14,8 +14,8 @@ class SendScheduledFollowUp implements ShouldQueue
         public int $leadId,
     ) {}
 
-    public function handle(SendFollowUpSms $sendFollowUpSms): void
+    public function handle(SendFollowUpMessage $sendFollowUpMessage): void
     {
-        $sendFollowUpSms->execute($this->leadId);
+        $sendFollowUpMessage->execute($this->leadId);
     }
 }

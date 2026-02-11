@@ -6,19 +6,18 @@
         @csrf
 
         <div class="form-group">
-            <label for="name" class="form-label">{{ __('auth.register.name') }}</label>
+            <label for="clinic_name" class="form-label">{{ __('auth.register.clinic_name') }}</label>
             <input
-                id="name"
+                id="clinic_name"
                 type="text"
-                name="name"
-                value="{{ old('name') }}"
+                name="clinic_name"
+                value="{{ old('clinic_name') }}"
                 class="form-input"
-                placeholder="{{ __('auth.register.name_placeholder') }}"
+                placeholder="{{ __('auth.register.clinic_name_placeholder') }}"
                 required
                 autofocus
-                autocomplete="name"
             >
-            @error('name')
+            @error('clinic_name')
                 <p class="form-error">{{ $message }}</p>
             @enderror
         </div>

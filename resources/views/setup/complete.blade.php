@@ -12,17 +12,6 @@
                 50% { transform: scale(1.1); }
                 100% { transform: scale(1); opacity: 1; }
             }
-            @keyframes confetti {
-                0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-                100% { transform: translateY(100px) rotate(720deg); opacity: 0; }
-            }
-            .confetti {
-                position: absolute;
-                width: 10px;
-                height: 10px;
-                border-radius: 2px;
-                animation: confetti 1.5s ease-out forwards;
-            }
         </style>
 
         <h1 class="wizard-title">{{ __('setup.complete_title') }}</h1>
@@ -44,13 +33,6 @@
                         <span style="color: #fff; font-size: 12px; font-weight: 700;">2</span>
                     </div>
                     <p style="font-size: 14px; color: #374151; margin: 0;">{{ __('setup.next_step_2') }}</p>
-                </div>
-
-                <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 28px; height: 28px; background: #0ea5e9; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                        <span style="color: #fff; font-size: 12px; font-weight: 700;">3</span>
-                    </div>
-                    <p style="font-size: 14px; color: #374151; margin: 0;">{{ __('setup.next_step_3') }}</p>
                 </div>
             </div>
         </div>

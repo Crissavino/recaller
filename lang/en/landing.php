@@ -37,8 +37,13 @@ return [
         'benefit3' => 'Reply from the dashboard or your phone',
         'benefit4' => 'Metrics on how much money you recover',
         'cta' => 'Start now',
+        'demo_phone' => '+1 (555) 234-5678',
         'demo_responded' => 'Responded 2 min ago',
         'demo_booked' => 'Appointment booked · +€120 recovered',
+        'demo_msg1' => 'Hi! We saw you called Dental Smile but we couldn\'t answer. Can we help you book an appointment?',
+        'demo_msg2' => 'Hi! Yes, I wanted to see if you have a slot for a cleaning this week',
+        'demo_msg3' => 'Of course! We have Thursday at 3pm or Friday at 10am available. Which works better for you?',
+        'demo_msg4' => 'Thursday at 3pm, perfect 👍',
     ],
 
     'steps' => [
@@ -47,7 +52,7 @@ return [
         'subtitle' => '4 automatic steps that recover patients while you attend to others',
         'step1_title' => 'Missed call',
         'step1_text' => 'A patient calls but no one can answer',
-        'step2_title' => 'Automatic SMS',
+        'step2_title' => 'Automatic WhatsApp',
         'step2_text' => 'In 60 sec they receive a personalized message',
         'step3_title' => 'Conversation',
         'step3_text' => 'The patient responds and you continue the chat',

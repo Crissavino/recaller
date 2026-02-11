@@ -17,31 +17,48 @@ return [
     // Step 2: Clinic
     'clinic_title' => 'Your Clinic',
     'clinic_subtitle' => 'Tell us about your practice so we can personalize your messages.',
-
-    // Step 3: Your Phone Number
-    'phone_title' => 'Your Phone Number',
-    'phone_subtitle' => 'This is your dedicated Recaller number. Missed calls to this number will trigger automatic follow-ups.',
-    'your_recaller_number' => 'Your Recaller Number',
-    'phone_instructions_title' => 'How to set up call forwarding:',
-    'phone_instruction_1' => 'Contact your phone provider or PBX administrator',
-    'phone_instruction_2' => 'Set up forwarding for unanswered calls to :number',
-    'phone_instruction_3' => 'Test by calling your clinic and not answering',
-    'phone_pending_title' => 'Setting up your number...',
-    'phone_pending_desc' => 'We\'re assigning a phone number to your account. This usually takes less than 24 hours.',
-    'phone_what_happens' => 'What happens next?',
-    'phone_what_1' => 'We\'ll assign you a dedicated phone number',
-    'phone_what_2' => 'You\'ll receive an email when it\'s ready',
-    'phone_what_3' => 'Then you can set up call forwarding from your clinic',
-    'phone_continue_anyway' => 'Continue Setup',
     'clinic_name' => 'Clinic Name',
     'clinic_name_placeholder' => 'e.g. Bright Smile Dental',
+    'clinic_phone' => 'Clinic Phone Number',
+    'clinic_phone_placeholder' => 'e.g. +1 555 123 4567',
+    'clinic_phone_help' => 'The number your patients call to reach your clinic. We\'ll use this to set up call forwarding.',
     'booking_link' => 'Booking Link',
     'booking_link_help' => 'Patients can click this to schedule appointments',
     'business_hours' => 'Business Hours',
     'business_hours_placeholder' => 'Mon-Fri 9am-6pm',
     'business_hours_help' => 'Let patients know when you\'re available',
 
-    // Step 4: Templates
+    // Step 3: Phone Setup
+    'phone_title' => 'Phone Setup',
+    'phone_subtitle' => 'Here\'s how Recaller works with your clinic phone.',
+    'phone_how_it_works' => 'How it works:',
+    'phone_flow_1' => 'A patient calls your clinic number',
+    'phone_flow_2' => 'The call is forwarded to your Recaller number',
+    'phone_flow_3' => 'We try to connect the call to your clinic',
+    'phone_flow_4' => 'If missed, we automatically follow up via SMS',
+    'your_recaller_number' => 'Your Recaller Number',
+    'phone_instructions_title' => 'How to set up call forwarding:',
+    'phone_instruction_1' => 'Contact your phone provider or PBX administrator',
+    'phone_instruction_2' => 'Set up forwarding for unanswered calls to :number',
+    'phone_instruction_3' => 'Test by calling your clinic and not answering',
+    'phone_pending_title' => 'Setting up your number...',
+    'phone_pending_desc' => 'We\'re assigning a Recaller number to your account. This usually takes less than 24 hours.',
+    'phone_what_happens' => 'What happens next?',
+    'phone_what_1' => 'We\'ll assign you a dedicated phone number',
+    'phone_what_2' => 'You\'ll receive an email when it\'s ready',
+    'phone_what_3' => 'Then you can set up call forwarding from your clinic',
+    'phone_continue_anyway' => 'Continue Setup',
+
+    // Step 4: Complete
+    'complete_title' => 'You\'re All Set!',
+    'complete_subtitle' => 'Your clinic is ready to start recovering missed calls.',
+    'whats_next' => 'What\'s next?',
+    'next_step_1' => 'Once your Recaller number is assigned, set up call forwarding from your clinic',
+    'next_step_2' => 'Missed calls will automatically trigger SMS follow-ups and appear in your dashboard',
+    'go_to_dashboard' => 'Go to Dashboard',
+    'welcome_complete' => 'Setup complete! Welcome to Recaller.',
+
+    // Legacy keys (templates/test - kept for backwards compatibility)
     'templates_title' => 'Your First Message',
     'templates_subtitle' => 'Create the message that will be sent automatically when you miss a call.',
     'template_name' => 'Template Name',
@@ -51,8 +68,6 @@ return [
     'default_template_body' => 'Hi! We noticed you called {{clinic_name}}. Sorry we missed you! How can we help you today?',
     'available_variables' => 'Available variables',
     'skip_step' => 'Skip this step',
-
-    // Step 5: Test
     'test_title' => 'Test Your Setup',
     'test_subtitle' => 'Send a test SMS to verify everything is working correctly.',
     'phone_ready' => 'Phone Number Ready',
@@ -66,14 +81,4 @@ return [
     'no_phone_desc' => 'Contact support to get your phone number set up. You can continue and test later.',
     'no_phone_configured' => 'No phone number is configured for your clinic.',
     'default_test_message' => 'Hi! This is a test message from :clinic. Your setup is working correctly!',
-
-    // Step 6: Complete
-    'complete_title' => 'You\'re All Set!',
-    'complete_subtitle' => 'Your clinic is ready to start recovering missed calls.',
-    'whats_next' => 'What\'s next?',
-    'next_step_1' => 'Forward your clinic calls to your Recaller number',
-    'next_step_2' => 'Missed calls will automatically trigger SMS follow-ups',
-    'next_step_3' => 'Track your conversations and recovered revenue in the dashboard',
-    'go_to_dashboard' => 'Go to Dashboard',
-    'welcome_complete' => 'Setup complete! Welcome to Recaller.',
 ];

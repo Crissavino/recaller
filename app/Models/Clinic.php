@@ -16,6 +16,7 @@ class Clinic extends Model
 
     protected $fillable = [
         'name',
+        'phone',
         'slug',
         'timezone',
         'is_active',

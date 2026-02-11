@@ -60,8 +60,16 @@ class ProcessTwilioSmsWebhook
             return null;
         }
 
-        return ClinicPhoneNumber::where('phone_number', $phoneNumber)
-            ->where('is_active', true)
+        // Normalize phone number - try with and without +
+        $normalized = ltrim($phoneNumber, '+');
+        $withPlus = '+' . $normalized;
+
+        return ClinicPhoneNumber::where('is_active', true)
+            ->where(function ($query) use ($phoneNumber, $normalized, $withPlus) {
+                $query->where('phone_number', $phoneNumber)
+                    ->orWhere('phone_number', $normalized)
+                    ->orWhere('phone_number', $withPlus);
+            })
             ->first();
     }
 

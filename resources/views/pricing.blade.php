@@ -299,6 +299,31 @@
         }
         .faq-teaser a:hover { text-decoration: underline; }
 
+        /* Currency selector */
+        .currency-selector {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            margin-bottom: 32px;
+        }
+        .currency-selector a {
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            color: #94a3b8;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .currency-selector a:hover { color: #fff; border-color: rgba(255, 255, 255, 0.3); }
+        .currency-selector a.active {
+            background: rgba(14, 165, 233, 0.2);
+            border-color: #0ea5e9;
+            color: #7dd3fc;
+        }
+
         @media (max-width: 900px) {
             .pricing-grid {
                 grid-template-columns: 1fr;
@@ -328,6 +353,9 @@
         </a>
         <div class="nav-links">
             <a href="/">{{ __('nav.home') ?? 'Home' }}</a>
+            @foreach(config('app.available_locales') as $loc)
+                <a href="{{ route('locale.switch', $loc) }}" style="{{ app()->getLocale() === $loc ? 'color: #fff; font-weight: 700;' : '' }}">{{ strtoupper($loc) }}</a>
+            @endforeach
             <a href="{{ route('login') }}" class="btn btn-secondary">{{ __('nav.login') }}</a>
         </div>
     </nav>
@@ -336,6 +364,11 @@
         @if(session('info'))
             <div style="background: rgba(14, 165, 233, 0.15); border: 1px solid rgba(14, 165, 233, 0.3); color: #7dd3fc; padding: 12px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 14px;">
                 {{ session('info') }}
+            </div>
+        @endif
+        @if(session('error'))
+            <div style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; padding: 12px 20px; border-radius: 12px; margin-bottom: 24px; font-size: 14px;">
+                {{ session('error') }}
             </div>
         @endif
         <h1>{{ __('landing.pricing.title') }}</h1>
@@ -349,16 +382,23 @@
         <span class="pricing-save-badge">{{ __('landing.pricing.save_badge') }}</span>
     </div>
 
+    <div class="currency-selector">
+        <a href="{{ route('currency.switch', 'eur') }}" class="{{ $currentCurrency === 'eur' ? 'active' : '' }}">EUR (€)</a>
+        <a href="{{ route('currency.switch', 'ron') }}" class="{{ $currentCurrency === 'ron' ? 'active' : '' }}">RON</a>
+    </div>
+
+    @php $prices = config('pricing.plans'); @endphp
+
     <div class="pricing-grid" id="pricing-container">
         <!-- Starter -->
         <div class="pricing-card">
             <h3 class="pricing-card-name">{{ __('landing.pricing.starter.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.starter.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">€</span>{{ __('landing.pricing.starter.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['starter'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">€</span>{{ __('landing.pricing.starter.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['starter'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">
@@ -371,7 +411,7 @@
             @else
                 <a href="{{ route('register') }}?plan=starter&interval=monthly" class="btn btn-secondary plan-btn" data-plan="starter">{{ __('landing.pricing.cta') }}</a>
             @endauth
-            <p class="pricing-sms-note">{{ __('landing.pricing.starter.sms_extra') }}</p>
+            <p class="pricing-sms-note">{{ $prices['starter'][$currentCurrency]['sms_extra'] }}</p>
         </div>
 
         <!-- Growth -->
@@ -379,10 +419,10 @@
             <h3 class="pricing-card-name">{{ __('landing.pricing.growth.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.growth.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">€</span>{{ __('landing.pricing.growth.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['growth'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">€</span>{{ __('landing.pricing.growth.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['growth'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">
@@ -395,7 +435,7 @@
             @else
                 <a href="{{ route('register') }}?plan=growth&interval=monthly" class="btn btn-primary plan-btn" data-plan="growth">{{ __('landing.pricing.cta') }}</a>
             @endauth
-            <p class="pricing-sms-note">{{ __('landing.pricing.growth.sms_extra') }}</p>
+            <p class="pricing-sms-note">{{ $prices['growth'][$currentCurrency]['sms_extra'] }}</p>
         </div>
 
         <!-- Pro -->
@@ -403,10 +443,10 @@
             <h3 class="pricing-card-name">{{ __('landing.pricing.pro.name') }}</h3>
             <p class="pricing-card-desc">{{ __('landing.pricing.pro.description') }}</p>
             <div class="price price-monthly">
-                <span class="currency">€</span>{{ __('landing.pricing.pro.price_monthly') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['pro'][$currentCurrency]['monthly'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <div class="price price-annual">
-                <span class="currency">€</span>{{ __('landing.pricing.pro.price_annual') }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
+                <span class="currency">{{ $currencySymbol }}</span>{{ $prices['pro'][$currentCurrency]['annual'] }}<span class="period">{{ __('landing.pricing.per_month') }}</span>
             </div>
             <p class="pricing-billed"><span class="annual-only">{{ __('landing.pricing.billed_annually') }}</span></p>
             <ul class="pricing-features">
@@ -419,7 +459,7 @@
             @else
                 <a href="{{ route('register') }}?plan=pro&interval=monthly" class="btn btn-secondary plan-btn" data-plan="pro">{{ __('landing.pricing.cta') }}</a>
             @endauth
-            <p class="pricing-sms-note">{{ __('landing.pricing.pro.sms_extra') }}</p>
+            <p class="pricing-sms-note">{{ $prices['pro'][$currentCurrency]['sms_extra'] }}</p>
         </div>
     </div>
 
