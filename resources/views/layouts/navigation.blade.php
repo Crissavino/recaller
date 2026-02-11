@@ -44,23 +44,24 @@
             <!-- Language Selector & Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6 sm:gap-4">
                 <!-- Language Selector -->
+                @php
+                    $localeFlags = ['en' => '🇬🇧', 'es' => '🇪🇸', 'ro' => '🇷🇴'];
+                    $localeNames = ['en' => 'English', 'es' => 'Español', 'ro' => 'Română'];
+                    $currentLocale = app()->getLocale();
+                @endphp
                 <div class="relative" x-data="{ open: false }">
-                    <button @click="open = !open" class="inline-flex items-center gap-1.5 px-2 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-700 transition">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                        </svg>
-                        <span class="uppercase">{{ app()->getLocale() }}</span>
+                    <button @click="open = !open" class="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-sm font-medium text-gray-500 hover:text-gray-700 bg-gray-50 hover:bg-gray-100 rounded-lg border border-gray-200 transition">
+                        <span>{{ $localeFlags[$currentLocale] ?? '🇬🇧' }}</span>
+                        <span class="uppercase">{{ $currentLocale }}</span>
+                        <svg class="w-3 h-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
                     </button>
-                    <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-28 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50" style="display: none;">
-                        <a href="{{ route('locale.switch', 'ro') }}" class="block px-4 py-2 text-sm {{ app()->getLocale() === 'ro' ? 'text-sky-600 bg-sky-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                            Română
-                        </a>
-                        <a href="{{ route('locale.switch', 'es') }}" class="block px-4 py-2 text-sm {{ app()->getLocale() === 'es' ? 'text-sky-600 bg-sky-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                            Español
-                        </a>
-                        <a href="{{ route('locale.switch', 'en') }}" class="block px-4 py-2 text-sm {{ app()->getLocale() === 'en' ? 'text-sky-600 bg-sky-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
-                            English
-                        </a>
+                    <div x-show="open" @click.away="open = false" x-transition class="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg border border-gray-100 py-1 z-50" style="display: none;">
+                        @foreach(['en', 'es', 'ro'] as $loc)
+                            <a href="{{ route('locale.switch', $loc) }}" class="flex items-center gap-2.5 px-4 py-2 text-sm {{ $currentLocale === $loc ? 'text-sky-600 bg-sky-50 font-medium' : 'text-gray-700 hover:bg-gray-50' }}">
+                                <span>{{ $localeFlags[$loc] }}</span>
+                                {{ $localeNames[$loc] }}
+                            </a>
+                        @endforeach
                     </div>
                 </div>
 
@@ -169,12 +170,11 @@
         <!-- Mobile Language Selector -->
         <div class="pt-2 pb-3 border-t border-gray-200">
             <div class="px-4 flex items-center gap-2">
-                <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-                </svg>
-                <a href="{{ route('locale.switch', 'ro') }}" class="px-3 py-1.5 text-sm rounded-md {{ app()->getLocale() === 'ro' ? 'bg-sky-100 text-sky-700 font-medium' : 'text-gray-600' }}">RO</a>
-                <a href="{{ route('locale.switch', 'es') }}" class="px-3 py-1.5 text-sm rounded-md {{ app()->getLocale() === 'es' ? 'bg-sky-100 text-sky-700 font-medium' : 'text-gray-600' }}">ES</a>
-                <a href="{{ route('locale.switch', 'en') }}" class="px-3 py-1.5 text-sm rounded-md {{ app()->getLocale() === 'en' ? 'bg-sky-100 text-sky-700 font-medium' : 'text-gray-600' }}">EN</a>
+                @foreach(['en', 'es', 'ro'] as $loc)
+                    <a href="{{ route('locale.switch', $loc) }}" class="flex items-center gap-1 px-3 py-1.5 text-sm rounded-md {{ app()->getLocale() === $loc ? 'bg-sky-100 text-sky-700 font-medium' : 'text-gray-600' }}">
+                        <span>{{ $localeFlags[$loc] }}</span> {{ strtoupper($loc) }}
+                    </a>
+                @endforeach
             </div>
         </div>
     </div>

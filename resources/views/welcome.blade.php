@@ -136,7 +136,6 @@
         .lang-dropdown-menu a.active { background: #eff6ff; color: #0ea5e9; }
         .lang-dropdown-menu a .flag { font-size: 18px; }
         .lang-dropdown-menu a .lang-label { flex: 1; }
-        }
 
         /* Buttons */
         .btn {
