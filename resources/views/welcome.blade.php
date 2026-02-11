@@ -84,26 +84,58 @@
             transition: color 0.2s;
         }
         .nav-links a:hover { color: #1a1a2e; }
-        .lang-selector {
+        .lang-dropdown {
+            position: relative;
+        }
+        .lang-dropdown-btn {
             display: flex;
-            gap: 4px;
-            padding: 4px;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
             background: #f1f5f9;
+            border: 1px solid #e2e8f0;
             border-radius: 8px;
-        }
-        .lang-selector a {
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: 600;
-            color: #64748b;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
             transition: all 0.2s;
+            text-decoration: none;
         }
-        .lang-selector a:hover { color: #1a1a2e; background: #fff; }
-        .lang-selector a.active {
+        .lang-dropdown-btn:hover { background: #e2e8f0; color: #1a1a2e; }
+        .lang-dropdown-btn .flag { font-size: 16px; line-height: 1; }
+        .lang-dropdown-btn .arrow { font-size: 10px; color: #94a3b8; transition: transform 0.2s; }
+        .lang-dropdown.open .arrow { transform: rotate(180deg); }
+        .lang-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 6px);
+            right: 0;
             background: #fff;
-            color: #0ea5e9;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            min-width: 160px;
+            padding: 6px;
+            display: none;
+            z-index: 200;
+        }
+        .lang-dropdown.open .lang-dropdown-menu { display: block; }
+        .lang-dropdown-menu a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #475569;
+            text-decoration: none;
+            transition: background 0.15s;
+        }
+        .lang-dropdown-menu a:hover { background: #f1f5f9; color: #1a1a2e; }
+        .lang-dropdown-menu a.active { background: #eff6ff; color: #0ea5e9; }
+        .lang-dropdown-menu a .flag { font-size: 18px; }
+        .lang-dropdown-menu a .lang-label { flex: 1; }
         }
 
         /* Buttons */
@@ -921,7 +953,7 @@
         }
         @media (max-width: 640px) {
             .nav-links > a:not(.btn) { display: none; }
-            .lang-selector { display: flex; }
+            .lang-dropdown { display: block; }
             .hero { padding: 110px 20px 50px; }
             .problem, .solution, .section, .pricing, .cta { padding: 50px 20px; }
             .hero-cta { flex-direction: column; align-items: center; }
@@ -953,10 +985,26 @@
                 <a href="#problem">{{ __('nav.the_problem') }}</a>
                 <a href="#como-funciona">{{ __('nav.how_it_works') }}</a>
                 <a href="#pricing">{{ __('nav.pricing') }}</a>
-                <div class="lang-selector">
-                    <a href="{{ route('locale.switch', 'ro') }}" class="{{ app()->getLocale() === 'ro' ? 'active' : '' }}">RO</a>
-                    <a href="{{ route('locale.switch', 'es') }}" class="{{ app()->getLocale() === 'es' ? 'active' : '' }}">ES</a>
-                    <a href="{{ route('locale.switch', 'en') }}" class="{{ app()->getLocale() === 'en' ? 'active' : '' }}">EN</a>
+                @php
+                    $localeFlags = ['en' => '🇬🇧', 'es' => '🇪🇸', 'ro' => '🇷🇴'];
+                    $localeNames = ['en' => 'English', 'es' => 'Español', 'ro' => 'Română'];
+                    $currentLocale = app()->getLocale();
+                @endphp
+                <div class="lang-dropdown" id="lang-dropdown">
+                    <button class="lang-dropdown-btn" onclick="document.getElementById('lang-dropdown').classList.toggle('open')" type="button">
+                        <span class="flag">{{ $localeFlags[$currentLocale] ?? '🇬🇧' }}</span>
+                        {{ strtoupper($currentLocale) }}
+                        <span class="arrow">▼</span>
+                    </button>
+                    <div class="lang-dropdown-menu">
+                        @foreach(['en', 'es', 'ro'] as $loc)
+                            <a href="{{ route('locale.switch', $loc) }}" class="{{ $currentLocale === $loc ? 'active' : '' }}">
+                                <span class="flag">{{ $localeFlags[$loc] }}</span>
+                                <span class="lang-label">{{ $localeNames[$loc] }}</span>
+                                <span style="font-size: 11px; color: #94a3b8;">{{ strtoupper($loc) }}</span>
+                            </a>
+                        @endforeach
+                    </div>
                 </div>
                 <a href="{{ route('login') }}" class="btn btn-secondary">{{ __('nav.login') }}</a>
             </div>
@@ -1292,5 +1340,11 @@
         </div>
         <p>{{ __('landing.footer.copyright', ['year' => date('Y')]) }}</p>
     </footer>
+<script>
+    document.addEventListener('click', function(e) {
+        var dd = document.getElementById('lang-dropdown');
+        if (dd && !dd.contains(e.target)) dd.classList.remove('open');
+    });
+</script>
 </body>
 </html>
