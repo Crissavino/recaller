@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Enums\MessageChannel;
 use App\Http\Controllers\Controller;
 use App\Models\Clinic;
+use App\Models\MessageTemplate;
 use App\Models\User;
 use App\Notifications\WelcomeNotification;
 use Illuminate\Auth\Events\Registered;
@@ -73,6 +75,18 @@ class RegisteredUserController extends Controller
 
         // Attach user to clinic as owner
         $clinic->users()->attach($user->id, ['role' => 'owner']);
+
+        // Create default WhatsApp template for missed calls
+        MessageTemplate::create([
+            'clinic_id' => $clinic->id,
+            'name' => 'Missed Call Follow-up (WhatsApp)',
+            'channel' => MessageChannel::WHATSAPP,
+            'content_sid' => config('services.twilio.default_content_sid'),
+            'trigger_event' => 'missed_call',
+            'body' => "Hi! This is {{clinic_name}}. We noticed you called but we couldn't answer. Can we help you book an appointment?",
+            'is_active' => true,
+            'sort_order' => 1,
+        ]);
 
         event(new Registered($user));
 

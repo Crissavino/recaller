@@ -62,6 +62,7 @@ return [
         'token' => env('TWILIO_AUTH_TOKEN'),
         'voice_webhook_url' => env('TWILIO_VOICE_WEBHOOK_URL'),
         'sms_webhook_url' => env('TWILIO_SMS_WEBHOOK_URL'),
+        'default_content_sid' => env('TWILIO_DEFAULT_CONTENT_SID'),
     ],
 
     'messagebird' => [
