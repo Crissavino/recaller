@@ -1336,6 +1336,12 @@
             <a href="{{ route('terms') }}">{{ __('legal.terms_link') }}</a>
             <span class="footer-divider">|</span>
             <a href="{{ route('privacy') }}">{{ __('legal.privacy_link') }}</a>
+            <span class="footer-divider">|</span>
+            <a href="{{ route('gdpr') }}">{{ __('legal.gdpr_link') }}</a>
+            <span class="footer-divider">|</span>
+            <a href="{{ route('cookies') }}">{{ __('legal.cookies_link') }}</a>
+            <span class="footer-divider">|</span>
+            <a href="{{ route('dpa') }}">{{ __('legal.dpa_link') }}</a>
         </div>
         <p>{{ __('landing.footer.copyright', ['year' => date('Y')]) }}</p>
     </footer>

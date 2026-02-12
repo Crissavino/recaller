@@ -84,9 +84,10 @@
                 >
                 <span class="text-sm text-gray-600">
                     {{ __('legal.accept_terms') }}
-                    <a href="{{ route('terms') }}" target="_blank" class="text-sky-500 hover:text-sky-600 underline">{{ __('legal.terms_link') }}</a>
-                    {{ __('legal.and') }}
+                    <a href="{{ route('terms') }}" target="_blank" class="text-sky-500 hover:text-sky-600 underline">{{ __('legal.terms_link') }}</a>,
                     <a href="{{ route('privacy') }}" target="_blank" class="text-sky-500 hover:text-sky-600 underline">{{ __('legal.privacy_link') }}</a>
+                    {{ __('legal.and') }}
+                    <a href="{{ route('gdpr') }}" target="_blank" class="text-sky-500 hover:text-sky-600 underline">{{ __('legal.gdpr_link') }}</a>
                 </span>
             </label>
             @error('terms')

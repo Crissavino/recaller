@@ -44,6 +44,21 @@ Route::get('/privacy', function () {
     return view('legal.privacy');
 })->name('privacy');
 
+// GDPR Compliance
+Route::get('/gdpr', function () {
+    return view('legal.gdpr');
+})->name('gdpr');
+
+// Cookie Policy
+Route::get('/cookies', function () {
+    return view('legal.cookies');
+})->name('cookies');
+
+// Data Processing Agreement
+Route::get('/dpa', function () {
+    return view('legal.dpa');
+})->name('dpa');
+
 // Checkout cancel (accessible without full auth for Stripe redirect)
 Route::get('/subscription/checkout-cancelled', [SubscriptionController::class, 'cancel'])->name('subscription.checkout-cancelled');
 
