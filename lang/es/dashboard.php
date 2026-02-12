@@ -28,6 +28,6 @@ return [
     'setup_title' => 'Completa tu configuración',
     'setup_text' => 'Tu cuenta no está completamente configurada. Completa estos pasos para empezar a recuperar llamadas perdidas.',
     'setup_phone' => 'Agrega un número de teléfono en Configuración para recibir llamadas perdidas',
-    'setup_template' => 'Activa un template de seguimiento en Configuración para enviar SMS automáticos',
+    'setup_template' => 'Activa un template de seguimiento en Configuración para enviar WhatsApp automáticos',
     'go_to_settings' => 'Ir a Configuración',
 ];

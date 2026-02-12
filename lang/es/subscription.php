@@ -53,7 +53,7 @@ return [
     'step_1_title' => 'Conecta tu proveedor de telefonia',
     'step_1' => 'Configura tu integracion con Twilio o Vonage para recibir llamadas perdidas',
     'step_2_title' => 'Personaliza tus plantillas',
-    'step_2' => 'Personaliza los mensajes SMS que recibiran los pacientes',
+    'step_2' => 'Personaliza los mensajes WhatsApp que recibiran los pacientes',
     'step_3_title' => 'Agrega tu numero de telefono',
     'step_3' => 'Conecta el numero de telefono donde recibes llamadas de pacientes',
     'start_setup' => 'Iniciar Configuracion',

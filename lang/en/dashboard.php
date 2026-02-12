@@ -28,6 +28,6 @@ return [
     'setup_title' => 'Complete your setup',
     'setup_text' => 'Your account is not fully configured. Complete these steps to start recovering missed calls.',
     'setup_phone' => 'Add a phone number in Settings to receive missed calls',
-    'setup_template' => 'Enable a follow-up template in Settings to send automatic SMS',
+    'setup_template' => 'Enable a follow-up template in Settings to send automatic WhatsApp',
     'go_to_settings' => 'Go to Settings',
 ];

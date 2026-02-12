@@ -5,7 +5,7 @@ return [
     'new_lead_subject' => 'New missed call at :clinic',
     'new_lead_greeting' => 'You have a new lead!',
     'new_lead_line1' => 'Someone called from :phone and couldn\'t reach you.',
-    'new_lead_line2' => 'We\'ve already sent them an automatic follow-up SMS.',
+    'new_lead_line2' => 'We\'ve already sent them an automatic follow-up WhatsApp.',
     'new_lead_line3' => 'Check your inbox to see the conversation.',
     'view_lead' => 'View Lead',
 

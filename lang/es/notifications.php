@@ -5,7 +5,7 @@ return [
     'new_lead_subject' => 'Nueva llamada perdida en :clinic',
     'new_lead_greeting' => 'Tienes un nuevo lead!',
     'new_lead_line1' => 'Alguien llamo desde :phone y no pudo comunicarse.',
-    'new_lead_line2' => 'Ya le enviamos un SMS de seguimiento automatico.',
+    'new_lead_line2' => 'Ya le enviamos un WhatsApp de seguimiento automatico.',
     'new_lead_line3' => 'Revisa tu bandeja de entrada para ver la conversacion.',
     'view_lead' => 'Ver Lead',
 

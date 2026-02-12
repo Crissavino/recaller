@@ -53,7 +53,7 @@ return [
     'step_1_title' => 'Conecteaza furnizorul de telefonie',
     'step_1' => 'Configureaza integrarea Twilio sau Vonage pentru a primi apeluri pierdute',
     'step_2_title' => 'Personalizeaza template-urile',
-    'step_2' => 'Personalizeaza mesajele SMS pe care le vor primi pacientii',
+    'step_2' => 'Personalizeaza mesajele WhatsApp pe care le vor primi pacientii',
     'step_3_title' => 'Adauga numarul de telefon',
     'step_3' => 'Conecteaza numarul de telefon unde primesti apeluri de la pacienti',
     'start_setup' => 'Incepe Configurarea',

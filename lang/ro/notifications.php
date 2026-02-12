@@ -5,7 +5,7 @@ return [
     'new_lead_subject' => 'Apel pierdut nou la :clinic',
     'new_lead_greeting' => 'Ai un lead nou!',
     'new_lead_line1' => 'Cineva a sunat de la :phone si nu te-a putut contacta.',
-    'new_lead_line2' => 'I-am trimis deja un SMS automat de follow-up.',
+    'new_lead_line2' => 'I-am trimis deja un WhatsApp automat de follow-up.',
     'new_lead_line3' => 'Verifica inbox-ul pentru a vedea conversatia.',
     'view_lead' => 'Vezi Lead-ul',
 

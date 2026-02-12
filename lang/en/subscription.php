@@ -53,7 +53,7 @@ return [
     'step_1_title' => 'Connect your phone provider',
     'step_1' => 'Configure your Twilio or Vonage integration to receive missed calls',
     'step_2_title' => 'Customize your templates',
-    'step_2' => 'Personalize the SMS messages patients will receive',
+    'step_2' => 'Personalize the WhatsApp messages patients will receive',
     'step_3_title' => 'Add your phone number',
     'step_3' => 'Connect the phone number where you receive patient calls',
     'start_setup' => 'Start Setup',

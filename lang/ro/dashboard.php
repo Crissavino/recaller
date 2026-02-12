@@ -28,6 +28,6 @@ return [
     'setup_title' => 'Completeaza configurarea',
     'setup_text' => 'Contul tau nu este complet configurat. Completeaza acesti pasi pentru a incepe recuperarea apelurilor pierdute.',
     'setup_phone' => 'Adauga un numar de telefon in Setari pentru a primi apeluri pierdute',
-    'setup_template' => 'Activeaza un template de follow-up in Setari pentru a trimite SMS automat',
+    'setup_template' => 'Activeaza un template de follow-up in Setari pentru a trimite WhatsApp automat',
     'go_to_settings' => 'Mergi la Setari',
 ];
