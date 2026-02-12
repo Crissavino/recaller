@@ -419,8 +419,17 @@
                                         <span style="background: #e0f2fe; color: #0369a1; font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 500; text-transform: uppercase;">
                                             {{ $template->trigger_event }}
                                         </span>
+                                        @if($template->channel->value === 'whatsapp')
+                                            <span style="background: #d1fae5; color: #065f46; font-size: 10px; padding: 2px 8px; border-radius: 9999px; font-weight: 500;">WhatsApp</span>
+                                        @endif
                                     </div>
                                     <p style="font-size: 13px; color: #6b7280; margin: 0; white-space: pre-wrap;">{{ $template->body }}</p>
+                                    @if($template->content_sid)
+                                        <p style="font-size: 11px; color: #9ca3af; margin: 4px 0 0 0;">
+                                            🔒 {{ __('settings.whatsapp_approved_message') }}
+                                            <code style="background: #f3f4f6; padding: 1px 4px; border-radius: 3px; font-size: 10px;">{{ $template->content_sid }}</code>
+                                        </p>
+                                    @endif
                                 </div>
                                 <div style="display: flex; gap: 8px; flex-shrink: 0;">
                                     <button @click="editing = true" style="background: none; border: 1px solid #d1d5db; padding: 6px 12px; border-radius: 6px; font-size: 13px; color: #374151; cursor: pointer;">{{ __('common.edit') }}</button>
@@ -465,15 +474,25 @@
                                 </div>
                                 <div style="margin-bottom: 12px;">
                                     <label style="display: block; font-size: 13px; font-weight: 500; color: #374151; margin-bottom: 4px;">{{ __('settings.template_body') }}</label>
-                                    <textarea name="body" rows="3" required
-                                        style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; resize: vertical;">{{ $template->body }}</textarea>
-                                    <p style="font-size: 12px; color: #9ca3af; margin-top: 4px;">
-                                        {{ __('settings.available_variables') }}:
-                                        <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{clinic_name}}</code>
-                                        <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{booking_link}}</code>
-                                        <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{business_hours}}</code>
-                                        <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{caller_phone}}</code>
-                                    </p>
+                                    @if($template->content_sid)
+                                        <div style="width: 100%; padding: 8px 12px; border: 1px solid #e5e7eb; border-radius: 6px; font-size: 14px; background: #f9fafb; color: #6b7280;">
+                                            {{ $template->body }}
+                                        </div>
+                                        <input type="hidden" name="body" value="{{ $template->body }}">
+                                        <p style="font-size: 12px; color: #f59e0b; margin-top: 4px;">
+                                            🔒 {{ __('settings.whatsapp_body_locked') }}
+                                        </p>
+                                    @else
+                                        <textarea name="body" rows="3" required
+                                            style="width: 100%; padding: 8px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; resize: vertical;">{{ $template->body }}</textarea>
+                                        <p style="font-size: 12px; color: #9ca3af; margin-top: 4px;">
+                                            {{ __('settings.available_variables') }}:
+                                            <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{clinic_name}}</code>
+                                            <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{booking_link}}</code>
+                                            <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{business_hours}}</code>
+                                            <code style="background: #f3f4f6; padding: 2px 4px; border-radius: 4px;">@{{caller_phone}}</code>
+                                        </p>
+                                    @endif
                                 </div>
                                 <div style="display: flex; gap: 8px;">
                                     <button type="submit" style="background: #111827; color: #fff; padding: 8px 16px; border-radius: 6px; font-size: 13px; font-weight: 500; border: none; cursor: pointer;">{{ __('common.save') }}</button>

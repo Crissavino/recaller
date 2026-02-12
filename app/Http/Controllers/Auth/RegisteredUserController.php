@@ -77,13 +77,14 @@ class RegisteredUserController extends Controller
         $clinic->users()->attach($user->id, ['role' => 'owner']);
 
         // Create default WhatsApp template for missed calls
+        // Body is for display only — actual message is controlled by content_sid (approved by Meta)
         MessageTemplate::create([
             'clinic_id' => $clinic->id,
             'name' => 'Missed Call Follow-up (WhatsApp)',
             'channel' => MessageChannel::WHATSAPP,
             'content_sid' => config('services.twilio.default_content_sid'),
             'trigger_event' => 'missed_call',
-            'body' => "Hi! This is {{clinic_name}}. We noticed you called but we couldn't answer. Can we help you book an appointment?",
+            'body' => "Buna! Am observat ca ai sunat la {{clinic_name}} si nu am putut raspunde. Cum te putem ajuta? Poti raspunde direct la acest mesaj.",
             'is_active' => true,
             'sort_order' => 1,
         ]);

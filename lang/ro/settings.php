@@ -24,6 +24,8 @@ return [
     'template_body' => 'Continut mesaj',
     'template_active' => 'Activ',
     'template_inactive' => 'Inactiv',
+    'whatsapp_approved_message' => 'Aprobat de WhatsApp — continutul este controlat de Meta.',
+    'whatsapp_body_locked' => 'Acest mesaj a fost aprobat de WhatsApp si nu poate fi editat. Pentru a-l schimba, trimite un template nou in Twilio.',
     'activate' => 'Activeaza',
     'deactivate' => 'Dezactiveaza',
     'no_templates' => 'Niciun template de mesaje inca.',

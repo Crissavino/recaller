@@ -24,6 +24,8 @@ return [
     'template_body' => 'Cuerpo del mensaje',
     'template_active' => 'Activo',
     'template_inactive' => 'Inactivo',
+    'whatsapp_approved_message' => 'Aprobado por WhatsApp — el contenido lo controla Meta.',
+    'whatsapp_body_locked' => 'Este mensaje fue aprobado por WhatsApp y no se puede editar. Para cambiarlo, envia un nuevo template en Twilio.',
     'activate' => 'Activar',
     'deactivate' => 'Desactivar',
     'no_templates' => 'No hay templates de mensajes aún.',
