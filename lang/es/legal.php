@@ -12,14 +12,14 @@ return [
         'section1_content' => 'Al acceder o usar Recaller ("Servicio"), aceptas estos Terminos de Servicio. Si no estas de acuerdo con estos terminos, por favor no uses nuestro Servicio.',
 
         'section2_title' => 'Descripcion del Servicio',
-        'section2_content' => 'Recaller proporciona servicios automatizados de seguimiento por SMS para clinicas dentales para recuperar llamadas perdidas. Nuestro Servicio incluye:',
-        'section2_item1' => 'Mensajes SMS automaticos a pacientes que llamaron cuando la clinica no estaba disponible',
+        'section2_content' => 'Recaller proporciona servicios automatizados de seguimiento por WhatsApp para clinicas dentales para recuperar llamadas perdidas. Nuestro Servicio incluye:',
+        'section2_item1' => 'Mensajes WhatsApp automaticos a pacientes que llamaron cuando la clinica no estaba disponible',
         'section2_item2' => 'Una bandeja de entrada unificada para gestionar conversaciones con pacientes',
         'section2_item3' => 'Analiticas e informes sobre pacientes recuperados',
         'section2_item4' => 'Integracion con sistemas telefonicos via Twilio o Vonage',
 
         'section3_title' => 'Responsabilidades del Usuario',
-        'section3_content' => 'Eres responsable de mantener la confidencialidad de tus credenciales de cuenta y de todas las actividades que ocurran bajo tu cuenta. Aceptas usar el Servicio en cumplimiento con todas las leyes aplicables, incluyendo regulaciones HIPAA y TCPA para comunicaciones de salud y mensajes SMS.',
+        'section3_content' => 'Eres responsable de mantener la confidencialidad de tus credenciales de cuenta y de todas las actividades que ocurran bajo tu cuenta. Aceptas usar el Servicio en cumplimiento con todas las leyes aplicables, incluyendo regulaciones HIPAA y TCPA para comunicaciones de salud y mensajes WhatsApp.',
 
         'section4_title' => 'Pago y Facturacion',
         'section4_content' => 'Las tarifas de suscripcion se facturan por adelantado de forma mensual o anual. Nos autorizas a cobrar tu metodo de pago por todas las tarifas incurridas. Los precios pueden cambiar con 30 dias de aviso. Los reembolsos se proporcionan a nuestra discrecion.',
@@ -47,7 +47,7 @@ return [
         'section2_title' => 'Como Usamos tu Informacion',
         'section2_content' => 'Usamos tu informacion para:',
         'section2_item1' => 'Proporcionar y mejorar nuestro Servicio',
-        'section2_item2' => 'Enviar mensajes SMS automaticos en tu nombre',
+        'section2_item2' => 'Enviar mensajes WhatsApp automaticos en tu nombre',
         'section2_item3' => 'Generar analiticas e informes',
         'section2_item4' => 'Comunicarnos contigo sobre tu cuenta',
 

@@ -12,14 +12,14 @@ return [
         'section1_content' => 'By accessing or using Recaller ("Service"), you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our Service.',
 
         'section2_title' => 'Description of Service',
-        'section2_content' => 'Recaller provides automated SMS follow-up services for dental clinics to recover missed calls. Our Service includes:',
-        'section2_item1' => 'Automated SMS messaging to patients who called when the clinic was unavailable',
+        'section2_content' => 'Recaller provides automated WhatsApp follow-up services for dental clinics to recover missed calls. Our Service includes:',
+        'section2_item1' => 'Automated WhatsApp messaging to patients who called when the clinic was unavailable',
         'section2_item2' => 'A unified inbox to manage patient conversations',
         'section2_item3' => 'Analytics and reporting on recovered patients',
         'section2_item4' => 'Integration with phone systems via Twilio or Vonage',
 
         'section3_title' => 'User Responsibilities',
-        'section3_content' => 'You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to use the Service in compliance with all applicable laws, including HIPAA and TCPA regulations for healthcare communications and SMS messaging.',
+        'section3_content' => 'You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account. You agree to use the Service in compliance with all applicable laws, including HIPAA and TCPA regulations for healthcare communications and WhatsApp messaging.',
 
         'section4_title' => 'Payment and Billing',
         'section4_content' => 'Subscription fees are billed in advance on a monthly or annual basis. You authorize us to charge your payment method for all fees incurred. Prices may change with 30 days notice. Refunds are provided at our discretion.',
@@ -47,7 +47,7 @@ return [
         'section2_title' => 'How We Use Your Information',
         'section2_content' => 'We use your information to:',
         'section2_item1' => 'Provide and improve our Service',
-        'section2_item2' => 'Send automated SMS messages on your behalf',
+        'section2_item2' => 'Send automated WhatsApp messages on your behalf',
         'section2_item3' => 'Generate analytics and reports',
         'section2_item4' => 'Communicate with you about your account',
 

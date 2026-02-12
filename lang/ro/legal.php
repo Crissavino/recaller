@@ -12,14 +12,14 @@ return [
         'section1_content' => 'Prin accesarea sau utilizarea Recaller ("Serviciul"), accepti sa fii legat de acesti Termeni si Conditii. Daca nu esti de acord cu acesti termeni, te rugam sa nu utilizezi Serviciul nostru.',
 
         'section2_title' => 'Descrierea Serviciului',
-        'section2_content' => 'Recaller ofera servicii automate de follow-up prin SMS pentru clinicile dentare, pentru recuperarea apelurilor pierdute. Serviciul nostru include:',
-        'section2_item1' => 'Mesaje SMS automate catre pacientii care au sunat cand clinica nu era disponibila',
+        'section2_content' => 'Recaller ofera servicii automate de follow-up prin WhatsApp pentru clinicile dentare, pentru recuperarea apelurilor pierdute. Serviciul nostru include:',
+        'section2_item1' => 'Mesaje WhatsApp automate catre pacientii care au sunat cand clinica nu era disponibila',
         'section2_item2' => 'Un inbox unificat pentru gestionarea conversatiilor cu pacientii',
         'section2_item3' => 'Analize si rapoarte despre pacientii recuperati',
         'section2_item4' => 'Integrare cu sisteme telefonice prin Twilio sau Vonage',
 
         'section3_title' => 'Responsabilitatile Utilizatorului',
-        'section3_content' => 'Esti responsabil pentru mentinerea confidentialitatii datelor de autentificare ale contului tau si pentru toate activitatile care au loc sub contul tau. Accepti sa utilizezi Serviciul in conformitate cu toate legile aplicabile, inclusiv regulamentele GDPR pentru comunicatii in domeniul sanatatii si mesagerie SMS.',
+        'section3_content' => 'Esti responsabil pentru mentinerea confidentialitatii datelor de autentificare ale contului tau si pentru toate activitatile care au loc sub contul tau. Accepti sa utilizezi Serviciul in conformitate cu toate legile aplicabile, inclusiv regulamentele GDPR pentru comunicatii in domeniul sanatatii si mesagerie WhatsApp.',
 
         'section4_title' => 'Plata si Facturare',
         'section4_content' => 'Taxele de abonament sunt facturate in avans pe baza lunara sau anuala. Ne autorizezi sa percepem taxe pe metoda ta de plata pentru toate costurile suportate. Preturile se pot modifica cu un preaviz de 30 de zile. Rambursarile sunt oferite la discretia noastra.',
@@ -47,7 +47,7 @@ return [
         'section2_title' => 'Cum Utilizam Informatiile Tale',
         'section2_content' => 'Utilizam informatiile tale pentru:',
         'section2_item1' => 'Furnizarea si imbunatatirea Serviciului nostru',
-        'section2_item2' => 'Trimiterea de mesaje SMS automate in numele tau',
+        'section2_item2' => 'Trimiterea de mesaje WhatsApp automate in numele tau',
         'section2_item3' => 'Generarea de analize si rapoarte',
         'section2_item4' => 'Comunicarea cu tine despre contul tau',
 
