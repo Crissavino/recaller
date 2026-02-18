@@ -1,2 +1,12 @@
 User-agent: *
-Disallow:
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /inbox
+Disallow: /conversations
+Disallow: /reports
+Disallow: /settings
+Disallow: /profile
+Disallow: /setup
+Disallow: /subscription
+
+Sitemap: https://recaller.io/sitemap.xml

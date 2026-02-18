@@ -3,7 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('legal.cookies.title') }} - {{ config('app.name') }}</title>
+    <title>{{ __('seo.cookies.title') }}</title>
+    <meta name="description" content="{{ __('seo.cookies.description') }}">
+    <link rel="canonical" href="{{ url('/cookies') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/cookies') }}">
+    <meta property="og:title" content="{{ __('seo.cookies.title') }}">
+    <meta property="og:description" content="{{ __('seo.cookies.description') }}">
+    <meta property="og:site_name" content="Recaller">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ __('seo.cookies.title') }}">
+    <meta name="twitter:description" content="{{ __('seo.cookies.description') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     <style>

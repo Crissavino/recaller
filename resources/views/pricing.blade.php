@@ -3,14 +3,100 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('landing.pricing.label') }} - Recaller</title>
-    <meta name="description" content="{{ __('landing.pricing.subtitle') }}">
+    <title>{{ __('seo.pricing.title') }}</title>
+    <meta name="description" content="{{ __('seo.pricing.description') }}">
+    <meta name="keywords" content="{{ __('seo.pricing.keywords') }}">
+    <link rel="canonical" href="{{ url('/pricing') }}">
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="48x48">
     <link rel="icon" type="image/svg+xml" href="/favicon.svg">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <meta name="theme-color" content="#0ea5e9">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/pricing') }}">
+    <meta property="og:title" content="{{ __('seo.pricing.title') }}">
+    <meta property="og:description" content="{{ __('seo.pricing.description') }}">
+    <meta property="og:site_name" content="Recaller">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
+    @if(file_exists(public_path('images/og-image.png')))
+    <meta property="og:image" content="{{ asset('images/og-image.png') }}">
+    @endif
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ __('seo.pricing.title') }}">
+    <meta name="twitter:description" content="{{ __('seo.pricing.description') }}">
+    @if(file_exists(public_path('images/og-image.png')))
+    <meta name="twitter:image" content="{{ asset('images/og-image.png') }}">
+    @endif
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "WebPage",
+        "name": "{{ __('seo.pricing.title') }}",
+        "description": "{{ __('seo.pricing.description') }}",
+        "url": "{{ url('/pricing') }}",
+        "mainEntity": {
+            "@@type": "ItemList",
+            "numberOfItems": 3,
+            "itemListElement": [
+                {
+                    "@@type": "ListItem",
+                    "position": 1,
+                    "item": {
+                        "@@type": "Product",
+                        "name": "Recaller Starter",
+                        "description": "{{ __('landing.pricing.starter.description') }}",
+                        "offers": {
+                            "@@type": "Offer",
+                            "price": "39",
+                            "priceCurrency": "EUR",
+                            "priceValidUntil": "{{ now()->addYear()->format('Y-m-d') }}",
+                            "availability": "https://schema.org/InStock"
+                        }
+                    }
+                },
+                {
+                    "@@type": "ListItem",
+                    "position": 2,
+                    "item": {
+                        "@@type": "Product",
+                        "name": "Recaller Growth",
+                        "description": "{{ __('landing.pricing.growth.description') }}",
+                        "offers": {
+                            "@@type": "Offer",
+                            "price": "79",
+                            "priceCurrency": "EUR",
+                            "priceValidUntil": "{{ now()->addYear()->format('Y-m-d') }}",
+                            "availability": "https://schema.org/InStock"
+                        }
+                    }
+                },
+                {
+                    "@@type": "ListItem",
+                    "position": 3,
+                    "item": {
+                        "@@type": "Product",
+                        "name": "Recaller Pro",
+                        "description": "{{ __('landing.pricing.pro.description') }}",
+                        "offers": {
+                            "@@type": "Offer",
+                            "price": "159",
+                            "priceCurrency": "EUR",
+                            "priceValidUntil": "{{ now()->addYear()->format('Y-m-d') }}",
+                            "availability": "https://schema.org/InStock"
+                        }
+                    }
+                }
+            ]
+        }
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800" rel="stylesheet" />

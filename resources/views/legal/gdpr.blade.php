@@ -3,7 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('legal.gdpr.title') }} - {{ config('app.name') }}</title>
+    <title>{{ __('seo.gdpr.title') }}</title>
+    <meta name="description" content="{{ __('seo.gdpr.description') }}">
+    <link rel="canonical" href="{{ url('/gdpr') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/gdpr') }}">
+    <meta property="og:title" content="{{ __('seo.gdpr.title') }}">
+    <meta property="og:description" content="{{ __('seo.gdpr.description') }}">
+    <meta property="og:site_name" content="Recaller">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ __('seo.gdpr.title') }}">
+    <meta name="twitter:description" content="{{ __('seo.gdpr.description') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     <style>

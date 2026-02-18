@@ -3,7 +3,17 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ __('legal.terms.title') }} - {{ config('app.name') }}</title>
+    <title>{{ __('seo.terms.title') }}</title>
+    <meta name="description" content="{{ __('seo.terms.description') }}">
+    <link rel="canonical" href="{{ url('/terms') }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url('/terms') }}">
+    <meta property="og:title" content="{{ __('seo.terms.title') }}">
+    <meta property="og:description" content="{{ __('seo.terms.description') }}">
+    <meta property="og:site_name" content="Recaller">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ __('seo.terms.title') }}">
+    <meta name="twitter:description" content="{{ __('seo.terms.description') }}">
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600,700&display=swap" rel="stylesheet" />
     <style>
