@@ -3,8 +3,10 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Recaller - {{ __('landing.hero.subhead') }}</title>
-    <meta name="description" content="{{ __('landing.hero.description') }}">
+    <title>{{ __('seo.home.title') }}</title>
+    <meta name="description" content="{{ __('seo.home.description') }}">
+    <meta name="keywords" content="{{ __('seo.home.keywords') }}">
+    <link rel="canonical" href="{{ url('/') }}">
 
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -18,21 +20,63 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url('/') }}">
-    <meta property="og:title" content="Recaller - {{ __('landing.hero.subhead') }}">
-    <meta property="og:description" content="{{ __('landing.hero.description') }}">
+    <meta property="og:title" content="{{ __('seo.home.title') }}">
+    <meta property="og:description" content="{{ __('seo.home.description') }}">
     <meta property="og:site_name" content="Recaller">
+    <meta property="og:locale" content="{{ str_replace('_', '-', app()->getLocale()) }}">
     @if(file_exists(public_path('images/og-image.png')))
     <meta property="og:image" content="{{ asset('images/og-image.png') }}">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
     @endif
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="{{ url('/') }}">
-    <meta name="twitter:title" content="Recaller - {{ __('landing.hero.subhead') }}">
-    <meta name="twitter:description" content="{{ __('landing.hero.description') }}">
+    <meta name="twitter:title" content="{{ __('seo.home.title') }}">
+    <meta name="twitter:description" content="{{ __('seo.home.description') }}">
     @if(file_exists(public_path('images/og-image.png')))
     <meta name="twitter:image" content="{{ asset('images/og-image.png') }}">
     @endif
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "SoftwareApplication",
+        "name": "Recaller",
+        "applicationCategory": "BusinessApplication",
+        "operatingSystem": "Web",
+        "description": "{{ __('seo.home.description') }}",
+        "url": "{{ url('/') }}",
+        "offers": {
+            "@@type": "AggregateOffer",
+            "priceCurrency": "EUR",
+            "lowPrice": "39",
+            "highPrice": "199",
+            "offerCount": "3"
+        },
+        "aggregateRating": {
+            "@@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "1"
+        }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@@type": "Organization",
+        "name": "Recaller",
+        "url": "{{ url('/') }}",
+        "description": "{{ __('seo.home.description') }}",
+        "contactPoint": {
+            "@@type": "ContactPoint",
+            "contactType": "customer support",
+            "email": "contactus@recaller.io"
+        }
+    }
+    </script>
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=inter:400,500,600,700,800,900" rel="stylesheet" />
