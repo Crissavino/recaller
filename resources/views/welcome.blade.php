@@ -705,7 +705,7 @@
             align-items: center;
         }
         .phone-frame {
-            width: 280px;
+            width: 320px;
             background: #111827;
             border-radius: 36px;
             padding: 12px;
@@ -742,7 +742,7 @@
         }
         .phone-screen-content {
             padding: 0 16px 20px;
-            min-height: 380px;
+            min-height: 440px;
             position: relative;
         }
 
@@ -948,8 +948,8 @@
                 gap: 32px;
             }
             .steps-phone { order: -1; }
-            .phone-frame { width: 260px; }
-            .phone-screen-content { min-height: 340px; }
+            .phone-frame { width: 280px; }
+            .phone-screen-content { min-height: 380px; }
         }
 
         /* Features Section */
@@ -1474,7 +1474,7 @@
                 <div class="step active" data-step="1">
                     <div class="step-icon-wrap">
                         <span class="step-number">1</span>
-                        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75L18 6m0 0l2.25 2.25M18 6l2.25-2.25M18 6l-2.25 2.25m1.5 13.5a11.95 11.95 0 01-4.638-2.693m0 0A11.953 11.953 0 0112 15.75c-1.638 0-3.192.329-4.612.922m9.224 0a11.953 11.953 0 01-4.612-.922M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/><line x1="17" y1="3" x2="21" y2="7" stroke-linecap="round"/><line x1="21" y1="3" x2="17" y2="7" stroke-linecap="round"/></svg>
                     </div>
                     <div class="step-content">
                         <h3>{{ __('landing.steps.step1_title') }}</h3>
@@ -1537,10 +1537,10 @@
                                     <div class="call-status"><span class="call-status-dot"></span>{{ __('landing.steps.phone_calling') }}</div>
                                     <div class="call-actions">
                                         <div class="call-btn decline">
-                                            <svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75L18 6m0 0l2.25 2.25M18 6l2.25-2.25M18 6l-2.25 2.25m1.5 13.5a11.95 11.95 0 01-4.638-2.693m0 0A11.953 11.953 0 0112 15.75c-1.638 0-3.192.329-4.612.922m9.224 0a11.953 11.953 0 01-4.612-.922"/></svg>
+                                            <svg viewBox="0 0 24 24" stroke-width="2.5"><line x1="8" y1="8" x2="16" y2="16" stroke-linecap="round"/><line x1="16" y1="8" x2="8" y2="16" stroke-linecap="round"/></svg>
                                         </div>
                                         <div class="call-btn accept">
-                                            <svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                                            <svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                                         </div>
                                     </div>
                                 </div>
@@ -1646,7 +1646,7 @@
             autoplayTimer = setInterval(() => {
                 currentStep = currentStep >= 4 ? 1 : currentStep + 1;
                 setActiveStep(currentStep);
-            }, 3500);
+            }, 5000);
         }
 
         startAutoplay();
