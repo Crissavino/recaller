@@ -577,45 +577,83 @@
         }
 
         /* Steps Section */
-        .steps-section { background: #f8fafc; }
-        .steps {
+        .steps-section {
+            background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+            overflow: hidden;
+        }
+        .steps-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 16px;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .steps-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
             position: relative;
         }
         .step {
-            text-align: center;
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
             position: relative;
-            z-index: 1;
+            padding-bottom: 36px;
+            cursor: pointer;
+            transition: all 0.3s ease;
         }
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            background: #fff;
-            border-radius: 20px;
+        .step:last-child { padding-bottom: 0; }
+        .step::before {
+            content: '';
+            position: absolute;
+            left: 28px;
+            top: 60px;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .step:last-child::before { display: none; }
+        .step.active::before {
+            background: linear-gradient(180deg, #0ea5e9, #e2e8f0);
+        }
+        .step-icon-wrap {
+            width: 56px;
+            height: 56px;
+            border-radius: 16px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 32px;
-            border: 2px solid #e2e8f0;
-            transition: all 0.25s ease;
+            flex-shrink: 0;
             position: relative;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+            z-index: 2;
+            transition: all 0.3s ease;
         }
-        .step:hover .step-icon {
-            transform: scale(1.05);
-            border-color: #bae6fd;
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.12);
+        .step-icon-wrap svg {
+            width: 26px;
+            height: 26px;
+            transition: all 0.3s ease;
+        }
+        .step:nth-child(1) .step-icon-wrap { background: #fef2f2; border: 2px solid #fecaca; }
+        .step:nth-child(1) .step-icon-wrap svg { stroke: #ef4444; }
+        .step:nth-child(2) .step-icon-wrap { background: #f0fdf4; border: 2px solid #bbf7d0; }
+        .step:nth-child(2) .step-icon-wrap svg { stroke: #22c55e; }
+        .step:nth-child(3) .step-icon-wrap { background: #eff6ff; border: 2px solid #bfdbfe; }
+        .step:nth-child(3) .step-icon-wrap svg { stroke: #3b82f6; }
+        .step:nth-child(4) .step-icon-wrap { background: #fefce8; border: 2px solid #fef08a; }
+        .step:nth-child(4) .step-icon-wrap svg { stroke: #eab308; fill: #eab308; }
+        .step.active .step-icon-wrap {
+            transform: scale(1.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
         }
         .step-number {
             position: absolute;
             top: -6px;
             right: -6px;
-            width: 24px;
-            height: 24px;
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
+            width: 22px;
+            height: 22px;
+            background: linear-gradient(135deg, #0ea5e9, #0284c7);
             color: #fff;
             border-radius: 50%;
             font-size: 11px;
@@ -623,17 +661,295 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            z-index: 3;
         }
-        .step h3 {
-            font-size: 15px;
+        .step-content { flex: 1; padding-top: 4px; }
+        .step-content h3 {
+            font-size: 17px;
             font-weight: 700;
-            margin-bottom: 6px;
             color: #1a1a2e;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
         }
-        .step p {
-            font-size: 13px;
+        .step.active .step-content h3 { color: #0284c7; }
+        .step-content p {
+            font-size: 14px;
             color: #64748b;
             line-height: 1.5;
+            margin: 0;
+        }
+        .step-content .step-tag {
+            display: inline-block;
+            margin-top: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 20px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: all 0.3s ease;
+        }
+        .step.active .step-content .step-tag {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .step:nth-child(1) .step-tag { background: #fef2f2; color: #dc2626; }
+        .step:nth-child(2) .step-tag { background: #f0fdf4; color: #16a34a; }
+        .step:nth-child(3) .step-tag { background: #eff6ff; color: #2563eb; }
+        .step:nth-child(4) .step-tag { background: #fefce8; color: #ca8a04; }
+
+        /* Phone Mockup */
+        .steps-phone {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .phone-frame {
+            width: 280px;
+            background: #111827;
+            border-radius: 36px;
+            padding: 12px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+            position: relative;
+        }
+        .phone-notch {
+            width: 120px;
+            height: 24px;
+            background: #111827;
+            border-radius: 0 0 16px 16px;
+            margin: 0 auto;
+            position: absolute;
+            top: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+        }
+        .phone-screen {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+        }
+        .phone-status-bar {
+            background: #f8fafc;
+            padding: 14px 20px 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+        .phone-screen-content {
+            padding: 0 16px 20px;
+            min-height: 380px;
+            position: relative;
+        }
+
+        /* Phone screen states */
+        .phone-state {
+            position: absolute;
+            top: 0; left: 16px; right: 16px; bottom: 20px;
+            opacity: 0;
+            transform: translateY(12px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+        }
+        .phone-state.active {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        /* State 1: Incoming call */
+        .call-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+        .call-avatar {
+            width: 80px; height: 80px;
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; font-weight: 700; color: #4f46e5;
+            margin-bottom: 16px;
+        }
+        .call-name { font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+        .call-status { font-size: 13px; color: #ef4444; margin-bottom: 32px; }
+        .call-status-dot {
+            display: inline-block;
+            width: 8px; height: 8px;
+            background: #ef4444;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse-dot 1.5s infinite;
+        }
+        @keyframes pulse-dot {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+        .call-actions {
+            display: flex;
+            gap: 40px;
+        }
+        .call-btn {
+            width: 56px; height: 56px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .call-btn.decline { background: #ef4444; }
+        .call-btn.accept { background: #22c55e; }
+        .call-btn svg { width: 24px; height: 24px; stroke: white; fill: none; }
+
+        /* State 2: WhatsApp message */
+        .wa-notification {
+            background: #f0fdf4;
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 20px;
+            border: 1px solid #bbf7d0;
+        }
+        .wa-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+        .wa-icon {
+            width: 36px; height: 36px;
+            background: #25D366;
+            border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .wa-icon svg { width: 20px; height: 20px; fill: white; }
+        .wa-app-name { font-size: 13px; font-weight: 600; color: #166534; }
+        .wa-time { font-size: 11px; color: #6b7280; }
+        .wa-body {
+            font-size: 13px; color: #374151; line-height: 1.6;
+        }
+        .wa-badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #dcfce7; padding: 4px 10px; border-radius: 20px;
+            font-size: 11px; font-weight: 600; color: #16a34a;
+            margin-top: 10px;
+        }
+
+        /* State 3: Conversation */
+        .chat-header {
+            display: flex; align-items: center; gap: 10px;
+            padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 16px;
+        }
+        .chat-avatar {
+            width: 36px; height: 36px;
+            background: linear-gradient(135deg, #dbeafe, #bfdbfe);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 13px; font-weight: 700; color: #2563eb;
+        }
+        .chat-name { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+        .chat-online { font-size: 11px; color: #22c55e; }
+        .chat-messages { display: flex; flex-direction: column; gap: 8px; }
+        .chat-bubble {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+        .chat-bubble.out {
+            background: #0ea5e9;
+            color: #fff;
+            align-self: flex-end;
+            border-bottom-right-radius: 4px;
+        }
+        .chat-bubble.in {
+            background: #f1f5f9;
+            color: #374151;
+            align-self: flex-start;
+            border-bottom-left-radius: 4px;
+        }
+        .chat-typing {
+            align-self: flex-start;
+            background: #f1f5f9;
+            border-radius: 16px;
+            padding: 10px 16px;
+            display: flex; gap: 4px;
+        }
+        .chat-typing span {
+            width: 6px; height: 6px;
+            background: #94a3b8;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+        .chat-typing span:nth-child(2) { animation-delay: 0.2s; }
+        .chat-typing span:nth-child(3) { animation-delay: 0.4s; }
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-4px); }
+        }
+
+        /* State 4: Booked */
+        .booked-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+        .booked-check {
+            width: 72px; height: 72px;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 16px;
+            animation: pop-in 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        @keyframes pop-in {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+        .booked-check svg { width: 36px; height: 36px; stroke: white; fill: none; }
+        .booked-title { font-size: 20px; font-weight: 700; color: #1a1a2e; margin-bottom: 4px; }
+        .booked-subtitle { font-size: 13px; color: #64748b; margin-bottom: 20px; }
+        .booked-card {
+            background: #f8fafc;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            text-align: left;
+            border: 1px solid #e2e8f0;
+        }
+        .booked-card-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+        }
+        .booked-card-row:not(:last-child) { border-bottom: 1px solid #f1f5f9; }
+        .booked-card-label { font-size: 12px; color: #6b7280; }
+        .booked-card-value { font-size: 13px; font-weight: 600; color: #1a1a2e; }
+        .booked-revenue {
+            display: inline-flex; align-items: center; gap: 4px;
+            background: #f0fdf4; border: 1px solid #bbf7d0;
+            padding: 8px 16px; border-radius: 10px;
+            margin-top: 16px;
+            font-size: 13px; font-weight: 600; color: #16a34a;
+        }
+
+        @media (max-width: 768px) {
+            .steps-wrapper {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+            .steps-phone { order: -1; }
+            .phone-frame { width: 260px; }
+            .phone-screen-content { min-height: 340px; }
         }
 
         /* Features Section */
@@ -1153,29 +1469,194 @@
             <h2 class="section-title">{{ __('landing.steps.title') }}</h2>
             <p class="section-subtitle">{{ __('landing.steps.subtitle') }}</p>
         </div>
-        <div class="steps">
-            <div class="step">
-                <div class="step-icon"><span class="step-number">1</span>📞</div>
-                <h3>{{ __('landing.steps.step1_title') }}</h3>
-                <p>{{ __('landing.steps.step1_text') }}</p>
+        <div class="steps-wrapper">
+            <div class="steps-timeline">
+                <div class="step active" data-step="1">
+                    <div class="step-icon-wrap">
+                        <span class="step-number">1</span>
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75L18 6m0 0l2.25 2.25M18 6l2.25-2.25M18 6l-2.25 2.25m1.5 13.5a11.95 11.95 0 01-4.638-2.693m0 0A11.953 11.953 0 0112 15.75c-1.638 0-3.192.329-4.612.922m9.224 0a11.953 11.953 0 01-4.612-.922M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>{{ __('landing.steps.step1_title') }}</h3>
+                        <p>{{ __('landing.steps.step1_text') }}</p>
+                        <span class="step-tag">{{ __('landing.steps.step1_tag') }}</span>
+                    </div>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-icon-wrap">
+                        <span class="step-number">2</span>
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z"/></svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>{{ __('landing.steps.step2_title') }}</h3>
+                        <p>{{ __('landing.steps.step2_text') }}</p>
+                        <span class="step-tag">{{ __('landing.steps.step2_tag') }}</span>
+                    </div>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-icon-wrap">
+                        <span class="step-number">3</span>
+                        <svg fill="none" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0011.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/></svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>{{ __('landing.steps.step3_title') }}</h3>
+                        <p>{{ __('landing.steps.step3_text') }}</p>
+                        <span class="step-tag">{{ __('landing.steps.step3_tag') }}</span>
+                    </div>
+                </div>
+                <div class="step" data-step="4">
+                    <div class="step-icon-wrap">
+                        <span class="step-number">4</span>
+                        <svg viewBox="0 0 24 24" stroke-width="0" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <div class="step-content">
+                        <h3>{{ __('landing.steps.step4_title') }}</h3>
+                        <p>{{ __('landing.steps.step4_text') }}</p>
+                        <span class="step-tag">{{ __('landing.steps.step4_tag') }}</span>
+                    </div>
+                </div>
             </div>
-            <div class="step">
-                <div class="step-icon"><span class="step-number">2</span>💬</div>
-                <h3>{{ __('landing.steps.step2_title') }}</h3>
-                <p>{{ __('landing.steps.step2_text') }}</p>
-            </div>
-            <div class="step">
-                <div class="step-icon"><span class="step-number">3</span>💼</div>
-                <h3>{{ __('landing.steps.step3_title') }}</h3>
-                <p>{{ __('landing.steps.step3_text') }}</p>
-            </div>
-            <div class="step">
-                <div class="step-icon"><span class="step-number">4</span>✅</div>
-                <h3>{{ __('landing.steps.step4_title') }}</h3>
-                <p>{{ __('landing.steps.step4_text') }}</p>
+
+            <div class="steps-phone">
+                <div class="phone-frame">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="phone-status-bar">
+                            <span>9:41</span>
+                            <span style="display: flex; gap: 4px; align-items: center;">
+                                <svg width="14" height="14" fill="#1a1a2e" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3a4.237 4.237 0 00-6 0zm-4-4l2 2a7.074 7.074 0 0110 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                                <svg width="14" height="14" fill="#1a1a2e" viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4z"/></svg>
+                            </span>
+                        </div>
+                        <div class="phone-screen-content">
+                            {{-- State 1: Missed call --}}
+                            <div class="phone-state active" data-phone-state="1">
+                                <div class="call-screen">
+                                    <div class="call-avatar">MP</div>
+                                    <div class="call-name">Maria Popescu</div>
+                                    <div class="call-status"><span class="call-status-dot"></span>{{ __('landing.steps.phone_calling') }}</div>
+                                    <div class="call-actions">
+                                        <div class="call-btn decline">
+                                            <svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 3.75L18 6m0 0l2.25 2.25M18 6l2.25-2.25M18 6l-2.25 2.25m1.5 13.5a11.95 11.95 0 01-4.638-2.693m0 0A11.953 11.953 0 0112 15.75c-1.638 0-3.192.329-4.612.922m9.224 0a11.953 11.953 0 01-4.612-.922"/></svg>
+                                        </div>
+                                        <div class="call-btn accept">
+                                            <svg viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- State 2: WhatsApp notification --}}
+                            <div class="phone-state" data-phone-state="2">
+                                <div class="wa-notification">
+                                    <div class="wa-header">
+                                        <div class="wa-icon">
+                                            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+                                        </div>
+                                        <div style="flex:1">
+                                            <div class="wa-app-name">WhatsApp</div>
+                                        </div>
+                                        <div class="wa-time">{{ __('landing.steps.phone_now') }}</div>
+                                    </div>
+                                    <div class="wa-body">
+                                        {{ __('landing.steps.phone_wa_message') }}
+                                    </div>
+                                    <div class="wa-badge">
+                                        <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+                                        {{ __('landing.steps.phone_auto_sent') }}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {{-- State 3: Chat conversation --}}
+                            <div class="phone-state" data-phone-state="3">
+                                <div class="chat-header">
+                                    <div class="chat-avatar">MP</div>
+                                    <div>
+                                        <div class="chat-name">Maria Popescu</div>
+                                        <div class="chat-online">online</div>
+                                    </div>
+                                </div>
+                                <div class="chat-messages">
+                                    <div class="chat-bubble out">{{ __('landing.steps.phone_chat_1') }}</div>
+                                    <div class="chat-bubble in">{{ __('landing.steps.phone_chat_2') }}</div>
+                                    <div class="chat-bubble out">{{ __('landing.steps.phone_chat_3') }}</div>
+                                    <div class="chat-typing"><span></span><span></span><span></span></div>
+                                </div>
+                            </div>
+
+                            {{-- State 4: Booked --}}
+                            <div class="phone-state" data-phone-state="4">
+                                <div class="booked-screen">
+                                    <div class="booked-check">
+                                        <svg viewBox="0 0 24 24" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                                    </div>
+                                    <div class="booked-title">{{ __('landing.steps.phone_booked_title') }}</div>
+                                    <div class="booked-subtitle">{{ __('landing.steps.phone_booked_subtitle') }}</div>
+                                    <div class="booked-card">
+                                        <div class="booked-card-row">
+                                            <span class="booked-card-label">{{ __('landing.steps.phone_booked_patient') }}</span>
+                                            <span class="booked-card-value">Maria Popescu</span>
+                                        </div>
+                                        <div class="booked-card-row">
+                                            <span class="booked-card-label">{{ __('landing.steps.phone_booked_date') }}</span>
+                                            <span class="booked-card-value">{{ __('landing.steps.phone_booked_date_value') }}</span>
+                                        </div>
+                                        <div class="booked-card-row">
+                                            <span class="booked-card-label">{{ __('landing.steps.phone_booked_service') }}</span>
+                                            <span class="booked-card-value">{{ __('landing.steps.phone_booked_service_value') }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="booked-revenue">
+                                        <svg width="16" height="16" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L11 10.586 14.586 7H12z" clip-rule="evenodd"/></svg>
+                                        +€150 {{ __('landing.steps.phone_booked_recovered') }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const steps = document.querySelectorAll('.step[data-step]');
+        const phoneStates = document.querySelectorAll('.phone-state[data-phone-state]');
+        let currentStep = 1;
+        let autoplayTimer;
+
+        function setActiveStep(stepNum) {
+            currentStep = stepNum;
+            steps.forEach(s => s.classList.toggle('active', parseInt(s.dataset.step) === stepNum));
+            phoneStates.forEach(s => s.classList.toggle('active', parseInt(s.dataset.phoneState) === stepNum));
+        }
+
+        steps.forEach(step => {
+            step.addEventListener('click', function() {
+                clearInterval(autoplayTimer);
+                setActiveStep(parseInt(this.dataset.step));
+                startAutoplay();
+            });
+        });
+
+        function startAutoplay() {
+            clearInterval(autoplayTimer);
+            autoplayTimer = setInterval(() => {
+                currentStep = currentStep >= 4 ? 1 : currentStep + 1;
+                setActiveStep(currentStep);
+            }, 3500);
+        }
+
+        startAutoplay();
+
+        // Pause on hover
+        const wrapper = document.querySelector('.steps-wrapper');
+        wrapper.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+        wrapper.addEventListener('mouseleave', startAutoplay);
+    });
+    </script>
 
     <section class="section" id="features">
         <div class="section-header">
