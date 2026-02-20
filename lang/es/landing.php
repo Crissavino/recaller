@@ -62,6 +62,8 @@ return [
         'step4_title' => 'Cita agendada',
         'step4_text' => 'Recuperas el paciente y los ingresos perdidos',
         'step4_tag' => 'Ingreso recuperado',
+        'phone_demo_name' => 'Laura Garcia',
+        'phone_demo_initials' => 'LG',
         'phone_calling' => 'Llamada entrante...',
         'phone_now' => 'ahora',
         'phone_wa_message' => 'Hola! Notamos que llamaste a Clínica Sonrisa. Disculpa que no pudimos atender! En qué podemos ayudarte?',

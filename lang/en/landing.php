@@ -62,6 +62,8 @@ return [
         'step4_title' => 'Appointment booked',
         'step4_text' => 'You recover the patient and the lost revenue',
         'step4_tag' => 'Revenue recovered',
+        'phone_demo_name' => 'Sarah Johnson',
+        'phone_demo_initials' => 'SJ',
         'phone_calling' => 'Incoming call...',
         'phone_now' => 'now',
         'phone_wa_message' => 'Hi! We noticed you called Smile Dental. Sorry we couldn\'t answer! How can we help you?',

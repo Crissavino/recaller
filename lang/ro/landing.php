@@ -62,6 +62,8 @@ return [
         'step4_title' => 'Programare facuta',
         'step4_text' => 'Recuperezi pacientul si veniturile pierdute',
         'step4_tag' => 'Venit recuperat',
+        'phone_demo_name' => 'Maria Popescu',
+        'phone_demo_initials' => 'MP',
         'phone_calling' => 'Apel primit...',
         'phone_now' => 'acum',
         'phone_wa_message' => 'Buna! Am observat ca ai sunat la Clinica Zambet. Ne pare rau ca nu am putut raspunde! Cu ce te putem ajuta?',

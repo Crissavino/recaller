@@ -1532,8 +1532,8 @@
                             {{-- State 1: Missed call --}}
                             <div class="phone-state active" data-phone-state="1">
                                 <div class="call-screen">
-                                    <div class="call-avatar">MP</div>
-                                    <div class="call-name">Maria Popescu</div>
+                                    <div class="call-avatar">{{ __('landing.steps.phone_demo_initials') }}</div>
+                                    <div class="call-name">{{ __('landing.steps.phone_demo_name') }}</div>
                                     <div class="call-status"><span class="call-status-dot"></span>{{ __('landing.steps.phone_calling') }}</div>
                                     <div class="call-actions">
                                         <div class="call-btn decline">
@@ -1571,9 +1571,9 @@
                             {{-- State 3: Chat conversation --}}
                             <div class="phone-state" data-phone-state="3">
                                 <div class="chat-header">
-                                    <div class="chat-avatar">MP</div>
+                                    <div class="chat-avatar">{{ __('landing.steps.phone_demo_initials') }}</div>
                                     <div>
-                                        <div class="chat-name">Maria Popescu</div>
+                                        <div class="chat-name">{{ __('landing.steps.phone_demo_name') }}</div>
                                         <div class="chat-online">online</div>
                                     </div>
                                 </div>
@@ -1596,7 +1596,7 @@
                                     <div class="booked-card">
                                         <div class="booked-card-row">
                                             <span class="booked-card-label">{{ __('landing.steps.phone_booked_patient') }}</span>
-                                            <span class="booked-card-value">Maria Popescu</span>
+                                            <span class="booked-card-value">{{ __('landing.steps.phone_demo_name') }}</span>
                                         </div>
                                         <div class="booked-card-row">
                                             <span class="booked-card-label">{{ __('landing.steps.phone_booked_date') }}</span>
