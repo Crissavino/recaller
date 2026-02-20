@@ -25,9 +25,9 @@ return [
     'no_leads' => 'Niciun lead inca',
     'missed_calls_appear' => 'Apelurile pierdute vor aparea aici',
     'no_messages' => 'Niciun mesaj',
-    'setup_title' => 'Completeaza configurarea',
-    'setup_text' => 'Contul tau nu este complet configurat. Completeaza acesti pasi pentru a incepe recuperarea apelurilor pierdute.',
-    'setup_phone' => 'Adauga un numar de telefon in Setari pentru a primi apeluri pierdute',
-    'setup_template' => 'Activeaza un template de follow-up in Setari pentru a trimite WhatsApp automat',
+    'phone_pending_title' => 'Pregatim numarul tau Recaller',
+    'phone_pending_text' => 'Configuram numarul tau Recaller. Te vom notifica cand este gata pentru a configura redirectionarea apelurilor.',
+    'setup_template_title' => 'Template de follow-up',
+    'setup_template' => 'Activeaza un template de follow-up in Setari pentru a trimite WhatsApp automat.',
     'go_to_settings' => 'Mergi la Setari',
 ];

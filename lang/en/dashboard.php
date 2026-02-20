@@ -25,9 +25,9 @@ return [
     'no_leads' => 'No leads yet',
     'missed_calls_appear' => 'Missed calls will appear here',
     'no_messages' => 'No messages',
-    'setup_title' => 'Complete your setup',
-    'setup_text' => 'Your account is not fully configured. Complete these steps to start recovering missed calls.',
-    'setup_phone' => 'Add a phone number in Settings to receive missed calls',
-    'setup_template' => 'Enable a follow-up template in Settings to send automatic WhatsApp',
+    'phone_pending_title' => 'Setting up your Recaller number',
+    'phone_pending_text' => 'We\'re configuring your Recaller number. We\'ll notify you when it\'s ready so you can set up call forwarding.',
+    'setup_template_title' => 'Follow-up template',
+    'setup_template' => 'Enable a follow-up template in Settings to send automatic WhatsApp.',
     'go_to_settings' => 'Go to Settings',
 ];

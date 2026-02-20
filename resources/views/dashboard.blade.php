@@ -13,51 +13,46 @@
     <div class="py-8">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
 
-            <!-- Configuration Warning -->
-            @if(!$configStatus['is_complete'])
-                <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
-                    <div style="display: flex; align-items: flex-start; gap: 12px;">
-                        <div style="width: 40px; height: 40px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                            <svg style="width: 20px; height: 20px; color: #fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
-                            </svg>
-                        </div>
-                        <div style="flex: 1;">
-                            <h3 style="font-weight: 600; color: #92400e; margin: 0 0 8px 0;">{{ __('dashboard.setup_title') }}</h3>
-                            <p style="font-size: 14px; color: #a16207; margin: 0 0 12px 0;">{{ __('dashboard.setup_text') }}</p>
-                            <div style="display: flex; flex-direction: column; gap: 8px;">
-                                @foreach($configStatus['issues'] as $issue)
-                                    <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="color: #b45309;">
-                                            @if($issue['type'] === 'phone')
-                                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-                                                </svg>
-                                            @else
-                                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
-                                                </svg>
-                                            @endif
-                                        </span>
-                                        <span style="font-size: 14px; color: #92400e;">
-                                            @if($issue['type'] === 'phone')
-                                                {{ __('dashboard.setup_phone') }}
-                                            @else
-                                                {{ __('dashboard.setup_template') }}
-                                            @endif
-                                        </span>
-                                    </div>
-                                @endforeach
-                            </div>
-                            <a href="{{ route('settings.index') }}" style="display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; font-size: 14px; font-weight: 600; color: #b45309; text-decoration: none;">
-                                {{ __('dashboard.go_to_settings') }}
-                                <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+            <!-- Configuration Notices -->
+            @foreach($configStatus['issues'] as $issue)
+                @if($issue['type'] === 'phone_pending')
+                    {{-- Recaller number pending - informational --}}
+                    <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: #3b82f6; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg style="width: 20px; height: 20px; color: #fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                                 </svg>
-                            </a>
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="font-weight: 600; color: #1e40af; margin: 0 0 4px 0;">{{ __('dashboard.phone_pending_title') }}</h3>
+                                <p style="font-size: 14px; color: #3b82f6; margin: 0;">{{ __('dashboard.phone_pending_text') }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                @elseif($issue['type'] === 'template')
+                    {{-- Template missing - warning, user can fix --}}
+                    <div style="background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 16px 20px; margin-bottom: 24px;">
+                        <div style="display: flex; align-items: flex-start; gap: 12px;">
+                            <div style="width: 40px; height: 40px; background: #f59e0b; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg style="width: 20px; height: 20px; color: #fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                                </svg>
+                            </div>
+                            <div style="flex: 1;">
+                                <h3 style="font-weight: 600; color: #92400e; margin: 0 0 4px 0;">{{ __('dashboard.setup_template_title') }}</h3>
+                                <p style="font-size: 14px; color: #a16207; margin: 0 0 12px 0;">{{ __('dashboard.setup_template') }}</p>
+                                <a href="{{ route('settings.index') }}" style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 600; color: #b45309; text-decoration: none;">
+                                    {{ __('dashboard.go_to_settings') }}
+                                    <svg style="width: 16px; height: 16px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
             @endif
 
             <!-- Stats Cards Row -->

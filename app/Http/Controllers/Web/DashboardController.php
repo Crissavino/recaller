@@ -214,23 +214,20 @@ class DashboardController extends Controller
     private function checkConfiguration(int $clinicId): array
     {
         $issues = [];
-        $isComplete = true;
 
-        // Check phone numbers
+        // Check phone numbers (Recaller number assigned by admin)
         $hasActivePhone = ClinicPhoneNumber::where('clinic_id', $clinicId)
             ->where('is_active', true)
             ->exists();
 
         if (!$hasActivePhone) {
             $issues[] = [
-                'type' => 'phone',
-                'message' => 'No phone number configured',
-                'action' => 'Add a phone number in Settings to receive missed calls',
+                'type' => 'phone_pending',
+                'severity' => 'info',
             ];
-            $isComplete = false;
         }
 
-        // Check SMS templates
+        // Check SMS templates (user can fix this)
         $hasActiveTemplate = MessageTemplate::where('clinic_id', $clinicId)
             ->where('is_active', true)
             ->exists();
@@ -238,14 +235,12 @@ class DashboardController extends Controller
         if (!$hasActiveTemplate) {
             $issues[] = [
                 'type' => 'template',
-                'message' => 'No SMS template active',
-                'action' => 'Enable a follow-up template in Settings to send automatic SMS',
+                'severity' => 'warning',
             ];
-            $isComplete = false;
         }
 
         return [
-            'is_complete' => $isComplete,
+            'is_complete' => empty($issues),
             'issues' => $issues,
         ];
     }

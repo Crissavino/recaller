@@ -25,9 +25,9 @@ return [
     'no_leads' => 'Sin leads aún',
     'missed_calls_appear' => 'Las llamadas perdidas aparecerán aquí',
     'no_messages' => 'Sin mensajes',
-    'setup_title' => 'Completa tu configuración',
-    'setup_text' => 'Tu cuenta no está completamente configurada. Completa estos pasos para empezar a recuperar llamadas perdidas.',
-    'setup_phone' => 'Agrega un número de teléfono en Configuración para recibir llamadas perdidas',
-    'setup_template' => 'Activa un template de seguimiento en Configuración para enviar WhatsApp automáticos',
+    'phone_pending_title' => 'Preparando tu número Recaller',
+    'phone_pending_text' => 'Estamos configurando tu número de Recaller. Te notificaremos cuando esté listo para que puedas activar el desvío de llamadas.',
+    'setup_template_title' => 'Template de seguimiento',
+    'setup_template' => 'Activa un template de seguimiento en Configuración para enviar WhatsApp automáticos.',
     'go_to_settings' => 'Ir a Configuración',
 ];
