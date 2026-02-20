@@ -53,7 +53,6 @@
                     </div>
                 @endif
             @endforeach
-            @endif
 
             <!-- Stats Cards Row -->
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 24px;">
