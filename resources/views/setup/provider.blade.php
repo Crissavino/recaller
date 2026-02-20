@@ -38,13 +38,97 @@
                 <p style="font-size: 28px; font-weight: 700; color: #15803d; margin: 0; letter-spacing: 1px;">{{ $recallerNumber->phone_number }}</p>
             </div>
 
-            <div style="background: #f0f9ff; border-radius: 12px; padding: 20px; margin-bottom: 24px;">
-                <p style="font-weight: 600; color: #0369a1; margin: 0 0 12px 0;">{{ __('setup.phone_instructions_title') }}</p>
-                <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 14px; line-height: 1.8;">
-                    <li>{{ __('setup.phone_instruction_1') }}</li>
-                    <li>{{ __('setup.phone_instruction_2', ['number' => $recallerNumber->phone_number]) }}</li>
-                    <li>{{ __('setup.phone_instruction_3') }}</li>
-                </ol>
+            {{-- Forwarding guide --}}
+            <div style="margin-bottom: 24px;">
+                <h3 style="font-size: 16px; font-weight: 600; color: #111827; margin: 0 0 4px 0; text-align: center;">{{ __('setup.forwarding_title') }}</h3>
+                <p style="font-size: 13px; color: #6b7280; margin: 0 0 16px 0; text-align: center;">{{ __('setup.forwarding_subtitle') }}</p>
+
+                {{-- Cards grid --}}
+                <div style="display: grid; grid-template-columns: 1fr; gap: 12px;">
+
+                    {{-- Card 1: Mobile --}}
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; position: relative;">
+                        <div style="position: absolute; top: -8px; left: 16px; background: #10b981; color: white; font-size: 11px; font-weight: 600; padding: 2px 10px; border-radius: 10px;">{{ __('setup.forwarding_recommended') }}</div>
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px; margin-top: 4px;">
+                            <div style="width: 36px; height: 36px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#3b82f6" viewBox="0 0 24 24" stroke-width="2">
+                                    <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p style="font-weight: 600; color: #111827; margin: 0; font-size: 14px;">{{ __('setup.forwarding_mobile_title') }}</p>
+                                <p style="font-size: 12px; color: #6b7280; margin: 0;">Vodafone, Orange, Digi</p>
+                            </div>
+                        </div>
+                        <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 13px; line-height: 1.9;">
+                            <li>{{ __('setup.forwarding_mobile_step_1') }}</li>
+                            <li>{{ __('setup.forwarding_mobile_step_2') }}</li>
+                            <li>{{ __('setup.forwarding_mobile_step_3') }}</li>
+                            <li>{{ __('setup.forwarding_mobile_step_4') }}</li>
+                        </ol>
+                        <div style="margin-top: 10px; background: #eff6ff; border-radius: 8px; padding: 10px 12px;">
+                            <p style="margin: 0; font-size: 12px; color: #1e40af;">
+                                <strong>{{ __('setup.forwarding_mobile_quick_code') }}</strong>
+                                <code style="background: #dbeafe; padding: 2px 6px; border-radius: 4px; font-size: 12px; letter-spacing: 0.5px;">**004*{{ str_replace(' ', '', $recallerNumber->phone_number) }}#</code>
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Card 2: Landline --}}
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <div style="width: 36px; height: 36px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#3b82f6" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p style="font-weight: 600; color: #111827; margin: 0; font-size: 14px;">{{ __('setup.forwarding_landline_title') }}</p>
+                                <p style="font-size: 12px; color: #6b7280; margin: 0;">RCS&RDS, Telekom, PBX</p>
+                            </div>
+                        </div>
+                        <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 13px; line-height: 1.9;">
+                            <li>{{ __('setup.forwarding_landline_step_1') }}</li>
+                            <li>{{ __('setup.forwarding_landline_step_2') }}</li>
+                            <li>{{ __('setup.forwarding_landline_step_3') }}</li>
+                            <li>{{ __('setup.forwarding_landline_step_4') }}</li>
+                        </ol>
+                        <div style="margin-top: 10px; background: #f5f5f4; border-radius: 8px; padding: 10px 12px;">
+                            <p style="margin: 0; font-size: 12px; color: #57534e;">{{ __('setup.forwarding_landline_note') }}</p>
+                        </div>
+                    </div>
+
+                    {{-- Card 3: VoIP --}}
+                    <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px;">
+                        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                            <div style="width: 36px; height: 36px; background: #dbeafe; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                                <svg width="20" height="20" fill="none" stroke="#3b82f6" viewBox="0 0 24 24" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <p style="font-weight: 600; color: #111827; margin: 0; font-size: 14px;">{{ __('setup.forwarding_voip_title') }}</p>
+                                <p style="font-size: 12px; color: #6b7280; margin: 0;">RingCentral, 3CX, Ooma</p>
+                            </div>
+                        </div>
+                        <ol style="margin: 0; padding-left: 20px; color: #374151; font-size: 13px; line-height: 1.9;">
+                            <li>{{ __('setup.forwarding_voip_step_1') }}</li>
+                            <li>{{ __('setup.forwarding_voip_step_2') }}</li>
+                            <li>{{ __('setup.forwarding_voip_step_3') }}</li>
+                            <li>{{ __('setup.forwarding_voip_step_4') }}</li>
+                        </ol>
+                    </div>
+                </div>
+
+                {{-- Tip --}}
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 14px 16px; margin-top: 14px; display: flex; gap: 10px; align-items: flex-start;">
+                    <svg width="20" height="20" fill="#16a34a" viewBox="0 0 20 20" style="flex-shrink: 0; margin-top: 1px;">
+                        <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                    </svg>
+                    <p style="margin: 0; font-size: 13px; color: #166534; line-height: 1.5;">
+                        {!! __('setup.forwarding_tip') !!}
+                    </p>
+                </div>
             </div>
         @else
             {{-- No Recaller number yet --}}

@@ -33,12 +33,6 @@
             </div>
 
             <div class="form-group">
-                <label class="form-label">{{ __('setup.booking_link') }}</label>
-                <input type="url" name="booking_link" class="form-input" value="{{ old('booking_link', $clinic->settings?->booking_link) }}" placeholder="https://your-booking-page.com">
-                <span class="form-help">{{ __('setup.booking_link_help') }}</span>
-            </div>
-
-            <div class="form-group">
                 <label class="form-label">{{ __('setup.business_hours') }}</label>
                 <input type="text" name="business_hours_text" class="form-input" value="{{ old('business_hours_text', $clinic->settings?->business_hours_text) }}" placeholder="{{ __('setup.business_hours_placeholder') }}">
                 <span class="form-help">{{ __('setup.business_hours_help') }}</span>
