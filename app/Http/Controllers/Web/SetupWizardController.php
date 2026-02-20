@@ -69,7 +69,6 @@ class SetupWizardController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'phone' => 'required|string|max:20',
-            'booking_link' => 'nullable|url|max:500',
             'business_hours_text' => 'nullable|string|max:255',
         ]);
 
@@ -87,7 +86,6 @@ class SetupWizardController extends Controller
         $clinic->settings()->updateOrCreate(
             ['clinic_id' => $clinic->id],
             [
-                'booking_link' => $validated['booking_link'],
                 'business_hours_text' => $validated['business_hours_text'],
             ]
         );
